@@ -20,6 +20,9 @@
 #    Header set Access-Control-Allow-Origin "*"
 # </IfModule>
 
+
+
+
 # ------------------------------------------------------------------------------
 # | CORS-enabled images                                                        |
 # ------------------------------------------------------------------------------
@@ -38,6 +41,9 @@
     </IfModule>
 </IfModule>
 
+
+
+
 # ------------------------------------------------------------------------------
 # | Web fonts access                                                           |
 # ------------------------------------------------------------------------------
@@ -51,9 +57,18 @@
 </IfModule>
 
 
+
+
+
+
+
+
 # ##############################################################################
 # # ERRORS                                                                     #
 # ##############################################################################
+
+
+
 
 # ------------------------------------------------------------------------------
 # | 404 error prevention for non-existing redirected folders                   |
@@ -66,6 +81,9 @@
 
 Options -MultiViews
 
+
+
+
 # ------------------------------------------------------------------------------
 # | Custom error messages / pages                                              |
 # ------------------------------------------------------------------------------
@@ -76,9 +94,14 @@ Options -MultiViews
 ErrorDocument 404 /404.html
 
 
+
+
+
+
 # ##############################################################################
 # # INTERNET EXPLORER                                                          #
 # ##############################################################################
+
 
 # ------------------------------------------------------------------------------
 # | Better website experience                                                  |
@@ -96,6 +119,9 @@ ErrorDocument 404 /404.html
     </FilesMatch>
 </IfModule>
 
+
+
+
 # ------------------------------------------------------------------------------
 # | Cookie setting from iframes                                                |
 # ------------------------------------------------------------------------------
@@ -105,6 +131,10 @@ ErrorDocument 404 /404.html
 # <IfModule mod_headers.c>
 #   Header set P3P "policyref=\"/w3c/p3p.xml\", CP=\"IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT\""
 # </IfModule>
+
+
+
+
 
 # ------------------------------------------------------------------------------
 # | Screen flicker                                                             |
@@ -119,9 +149,16 @@ ErrorDocument 404 /404.html
 # SetEnvIf brokenvary 1 force-no-vary
 
 
+
+
+
+
+
 # ##############################################################################
 # # MIME TYPES AND ENCODING                                                    #
 # ##############################################################################
+
+
 
 # ------------------------------------------------------------------------------
 # | Proper MIME types for all files                                            |
@@ -177,6 +214,9 @@ ErrorDocument 404 /404.html
 
 </IfModule>
 
+
+
+
 # ------------------------------------------------------------------------------
 # | UTF-8 encoding                                                             |
 # ------------------------------------------------------------------------------
@@ -188,6 +228,11 @@ AddDefaultCharset utf-8
 <IfModule mod_mime.c>
     AddCharset utf-8 .atom .css .js .json .rss .vtt .webapp .xml
 </IfModule>
+
+
+
+
+
 
 
 # ##############################################################################
@@ -214,6 +259,9 @@ AddDefaultCharset utf-8
     RewriteEngine On
   # RewriteBase /
 </IfModule>
+
+
+
 
 # ------------------------------------------------------------------------------
 # | Suppressing / Forcing the "www." at the beginning of URLs                  |
@@ -256,9 +304,15 @@ AddDefaultCharset utf-8
 # </IfModule>
 
 
+
+
+
 # ##############################################################################
 # # SECURITY                                                                   #
 # ##############################################################################
+
+
+
 
 # ------------------------------------------------------------------------------
 # | Content Security Policy (CSP)                                              |
@@ -282,6 +336,9 @@ AddDefaultCharset utf-8
 #        Header unset Content-Security-Policy
 #    </FilesMatch>
 # </IfModule>
+
+
+
 
 # ------------------------------------------------------------------------------
 # | File access                                                                |
@@ -319,6 +376,9 @@ AddDefaultCharset utf-8
     Satisfy All
 </FilesMatch>
 
+
+
+
 # ------------------------------------------------------------------------------
 # | Secure Sockets Layer (SSL)                                                 |
 # ------------------------------------------------------------------------------
@@ -346,6 +406,9 @@ AddDefaultCharset utf-8
 # <IfModule mod_headers.c>
 #    Header set Strict-Transport-Security max-age=16070400;
 # </IfModule>
+
+
+
 
 # ------------------------------------------------------------------------------
 # | Server software information                                                |
@@ -404,6 +467,9 @@ AddDefaultCharset utf-8
 
 </IfModule>
 
+
+
+
 # ------------------------------------------------------------------------------
 # | Content transformations                                                    |
 # ------------------------------------------------------------------------------
@@ -414,6 +480,9 @@ AddDefaultCharset utf-8
 # <IfModule mod_headers.c>
 #    Header set Cache-Control "no-transform"
 # </IfModule>
+
+
+
 
 # ------------------------------------------------------------------------------
 # | ETag removal                                                               |
@@ -428,6 +497,9 @@ AddDefaultCharset utf-8
 </IfModule>
 
 FileETag None
+
+
+
 
 # ------------------------------------------------------------------------------
 # | Expires headers (for better cache control)                                 |
@@ -488,6 +560,9 @@ FileETag None
 
 </IfModule>
 
+
+
+
 # ------------------------------------------------------------------------------
 # | Filename-based cache busting                                               |
 # ------------------------------------------------------------------------------
@@ -504,6 +579,9 @@ FileETag None
 #    RewriteCond %{REQUEST_FILENAME} !-d
 #    RewriteRule ^(.+)\.(\d+)\.(js|css|png|jpg|gif)$ $1.$3 [L]
 # </IfModule>
+
+
+
 
 # ------------------------------------------------------------------------------
 # | File concatenation                                                         |
@@ -528,6 +606,9 @@ FileETag None
 #    </FilesMatch>
 # </IfModule>
 
+
+
+
 # ------------------------------------------------------------------------------
 # | Persistent connections                                                     |
 # ------------------------------------------------------------------------------
@@ -541,3 +622,22 @@ FileETag None
 # <IfModule mod_headers.c>
 #    Header set Connection Keep-Alive
 # </IfModule>
+
+
+
+
+# ------------------------------------------------------------------------------
+# | html5 pushstate (history) support                                          |
+# ------------------------------------------------------------------------------
+
+# Check if the requested filename is a static resource (image, stylesheet, etc),
+# if not, check if the requested file is index.html,
+# if not, then redirect to index.html
+
+<ifModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !index
+    RewriteRule (.*) index.html [L]
+</ifModule>

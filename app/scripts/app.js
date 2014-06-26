@@ -29,9 +29,5 @@ angular.module( 'appName', [
 
 .run( function( $rootScope, $location, $routeParams )
 {
-	$rootScope.$on( '$routeChangeSuccess', function( newRoute, oldRoute )
-		{
-			$location.hash( $routeParams.scrollTo );
-			$anchorScroll(  );  
-		} );
+	
 } );

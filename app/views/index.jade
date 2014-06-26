@@ -5,11 +5,19 @@ html
 		meta( http-equiv="Content-Type" content="text/html; charset=utf-8" )
 		meta( name="viewport" content="width=device-width, initial-scale=1.0" )
 		link( rel="stylesheet", href="css/main.css" )
+	
 	body( ng-app="appName" )
+		
 		div( ng-view )
 
+	//- Bower Components
 	script( src="bower_components/angular/angular.js" )
 	script( src="bower_components/angular-route/angular-route.js" )
 
 	script( src="scripts/app.js" )
+
+	//- Controllers
 	script( src="scripts/controllers/main.js" )
+
+	//- Directives
+	script( src="scripts/directives/directive.js" )

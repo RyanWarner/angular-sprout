@@ -6,6 +6,7 @@ var gutil 		= require( 'gulp-util' );
 var open 		= require( 'gulp-open' );
 var clean 		= require( 'gulp-clean' );
 var historyApiFallback = require('connect-history-api-fallback');
+var runSequence = require('run-sequence');
 
 var OUTPUT_DIR = 'build/';
 
@@ -20,6 +21,7 @@ gulp.task( 'watch', function(  )
 	gulp.watch( 'app/views/**/*.jade', [ 'jade' ] );
 	gulp.watch( 'app/styles/**/*.scss', [ 'sass' ] );
 	gulp.watch( 'app/scripts/**/*.js', [ 'js' ] );
+	gulp.watch( 'app/images/**/*.*', [ 'images' ] );
 } );
 
 gulp.task( 'clean', function(  )
@@ -58,6 +60,13 @@ gulp.task( 'js', function(  )
 		.pipe( connect.reload(  ) );
 } );
 
+gulp.task( 'images', function(  )
+{
+	return gulp.src( 'app/images/*' )
+		.pipe( gulp.dest( OUTPUT_DIR + '/images/' ) )
+		.pipe( connect.reload(  ) );
+} );
+
 gulp.task( 'connect', function(  )
 {
 		connect.server({
@@ -83,4 +92,18 @@ gulp.task( 'open', function(  )
 		.pipe( open( "http://localhost:8080", options ) );
 } );
 
-gulp.task( 'default', [ 'jade', 'sass', 'js', 'watch', 'connect', 'open' ] );
+gulp.task( 'default', function(  )
+{
+	runSequence(
+		'clean', 
+		[ 
+			'jade', 
+			'sass', 
+			'js',
+			'images',
+		],
+		'watch',
+		'connect',
+		'open'
+	);
+} );
