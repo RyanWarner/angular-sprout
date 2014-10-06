@@ -1,3 +1,5 @@
+This is a giant WIP and is not ready for use.
+
 AngularJS Boilerplate
 =====================
 
