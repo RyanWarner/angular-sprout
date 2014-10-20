@@ -20,15 +20,26 @@ appSeed.config( function( $stateProvider, $locationProvider )
 		}
 	} );
 
-	$stateProvider.state( 'root.test',
+	$stateProvider.state( 'root.page-one',
 	{
-		url: 'test',
+		url: 'page-one',
 		views:
 		{
-			'root':
+			'page':
 			{
-				templateUrl: 'partials/test.html',
-				controller: 'RootController'
+				templateUrl: 'partials/page-one.html'
+			}
+		}
+	} );
+
+	$stateProvider.state( 'root.page-two',
+	{
+		url: 'page-two',
+		views:
+		{
+			'page':
+			{
+				templateUrl: 'partials/page-two.html'
 			}
 		}
 	} );

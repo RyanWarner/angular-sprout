@@ -65,6 +65,7 @@ gulp.task( 'inject', function( )
 {
     var injectOptions = 
     {
+      ignorePath: 'scripts/bower/**/*.*',
       relative: true,
       addRootSlash: false
     };
@@ -83,7 +84,7 @@ gulp.task( 'inject', function( )
         .pipe( inject( gulp.src( [ './www/css/main.css' ], { read: false } ), injectOptions ) )
         
         .pipe( inject( gulp.src( [ BOWER_JS_FILES ], { read: false } ), bowerInjectOptions ) )
-        .pipe( inject( gulp.src( [ SCRIPTS_OUTPUT_FILES ], { read: false } ), injectOptions ) )
+        .pipe( inject( gulp.src( [ BUILD_DIR + '/scripts/**/*.js', '!' + BUILD_DIR + '/scripts/bower/**/*.*' ], { read: false } ), injectOptions ) )
         .on( 'error', handleError )
         
         .pipe( gulp.dest( BUILD_DIR ) );
