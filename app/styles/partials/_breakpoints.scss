@@ -1,7 +1,0 @@
-@mixin breakpoint( $breakpointName )
-{
-  @if $breakpointName == iphone
-  { 
-    @media ( max-width: 320px ) { @content; }
-  }
-}
