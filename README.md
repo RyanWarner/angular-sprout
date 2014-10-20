@@ -1,25 +1,23 @@
-This is a giant WIP and is not ready for use.
+# angular-seed
 
-AngularJS Boilerplate
-=====================
+An opinionated starting point for AngularJS web applications.
 
-This is a boilerplate for a front-end only Angular.js application.
+## Stack
 
-Stack
------
+- Angular with ui-router
+- Jade
+- Sass
+- Gulp
 
-Jade, Sass, and Angular.js with Gulp.js as a build system.
+## Local Setup
 
-Local Setup
------------
+1. `npm install`
+2. `gulp`
 
-1. Install [NodeJS](http://nodejs.org/).
-2. Install [Gulp](http://gulpjs.com/) globally. `npm install gulp -g`
-3. `cd angular-boilerplate`
-4. `npm install`
-5. `gulp`
+## Tests
 
-Deployment
-----------
+TBA
 
-1. TBA
+## Coding Style
+
+[squint-style](https://github.com/RyanWarner/squint-style)
