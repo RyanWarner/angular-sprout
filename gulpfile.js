@@ -1,6 +1,8 @@
 var gulp            = require( 'gulp' );
 var gutil           = require( 'gulp-util' );
 var connect         = require( 'gulp-connect' );
+var browserSync     = require( 'browser-sync' );
+var reload          = browserSync.reload;
 var rimraf          = require( 'rimraf' );
 
 var runSequence     = require( 'run-sequence' );
@@ -63,7 +65,6 @@ gulp.task( 'inject', function( )
 {
     var injectOptions = 
     {
-      //ignorePath: 'www',
       relative: true,
       addRootSlash: false
     };
@@ -114,7 +115,8 @@ gulp.task( 'sass', [ 'scss-lint' ], function(  )
         .on( 'error', handleError )
         .pipe( prefix( 'last 2 versions', { cascade: true } ) )
         .on( 'error', handleError )
-        .pipe( gulp.dest( BUILD_DIR + '/css' ) );
+        .pipe( gulp.dest( BUILD_DIR + '/css' ) )
+        .pipe( reload( { stream: true } ) );
 } );
 
 
@@ -205,6 +207,27 @@ gulp.task( 'connect', function(  )
             // This get's rid of the # symbol in the URL
             return[ noHash ];
         }
+    } );
+} );
+
+gulp.task( 'browser-sync', function(  )
+{
+    browserSync( {
+
+        server:
+        {
+            baseDir: BUILD_DIR
+        },
+        middleware: function (req, res, next)
+        {
+            return[ noHash ];
+        },
+        ghostMode: {
+                links: false
+            },
+        port: 8080,
+        open: false
+
     } );
 } );
 

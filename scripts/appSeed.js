@@ -20,6 +20,19 @@ appSeed.config( function( $stateProvider, $locationProvider )
 		}
 	} );
 
+	$stateProvider.state( 'root.test',
+	{
+		url: 'test',
+		views:
+		{
+			'root':
+			{
+				templateUrl: 'partials/test.html',
+				controller: 'RootController'
+			}
+		}
+	} );
+
 	$locationProvider.html5Mode( true );
 } );
 
