@@ -1,11 +1,11 @@
 {
-  "name": "Ryan Warner",
+  "name": "angular-seed",
   "version": "0.0.0",
   "homepage": "https://github.com/RyanWarner/angular-seed",
   "authors": [
     "Ryan Warner <warner.ryan@gmail.com>"
   ],
-  "description": "Starting point for angular based projects.",
+  "description": "Starting point for Angular based projects.",
   "keywords": [
     "angular"
   ],

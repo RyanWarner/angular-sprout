@@ -1,0 +1,37 @@
+{
+  "name": "angular-seed",
+  "version": "0.0.0",
+  "description": "Starting point for AngularJS projects.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RyanWarner/angular-seed.git"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "author": "Ryan Warner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RyanWarner/angular-seed/issues"
+  },
+  "homepage": "https://github.com/RyanWarner/angular-seed",
+  "devDependencies": {
+    "gulp": "~3.8.8",
+    "gulp-util": "~3.0.1",
+    "gulp-sass": "~1.2.0",
+    "gulp-jade": "~0.9.0",
+    "gulp-scss-lint": "~0.1.4",
+    "gulp-csscomb": "~3.0.3",
+    "gulp-eslint": "~0.1.8",
+    "gulp-inject": "~1.0.2",
+    "gulp-autoprefixer": "~1.0.1",
+    "main-bower-files": "~2.1.0",
+    "run-sequence": "~1.0.1",
+    "connect-history-api-fallback": "0.0.5",
+    "rimraf": "~2.2.8"
+  }
+}
