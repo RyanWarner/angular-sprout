@@ -1,27 +1,27 @@
-var gulp          = require( 'gulp' );
-var gutil         = require( 'gulp-util' );
-var bower         = require( 'bower' );
-var runSequence   = require( 'run-sequence' );
-var concat        = require( 'gulp-concat' );
+var gulp            = require( 'gulp' );
+var gutil           = require( 'gulp-util' );
+var connect         = require( 'gulp-connect' );
+var rimraf          = require( 'rimraf' );
 
-var sass       = require( 'gulp-sass' );
-var prefix     = require( 'gulp-autoprefixer' );
-var minifyCss  = require( 'gulp-minify-css' );
+var runSequence     = require( 'run-sequence' );
+var noHash          = require( 'connect-history-api-fallback' );
+var sass            = require( 'gulp-sass' );
+var prefix          = require( 'gulp-autoprefixer' );
 
-var mainBowerFiles      = require( 'main-bower-files' );
-var inject              = require( 'gulp-inject' );
+var mainBowerFiles  = require( 'main-bower-files' );
+var inject          = require( 'gulp-inject' );
 
-var rename     = require( 'gulp-rename' );
-var sh         = require( 'shelljs' );
+var jade            = require( 'gulp-jade' );
 
-var jade       = require( 'gulp-jade' );
-
-var scsslint     = require( 'gulp-scss-lint' );
-var csscomb      = require( 'gulp-csscomb' );
-var eslint       = require( 'gulp-eslint' );
+var scsslint        = require( 'gulp-scss-lint' );
+var csscomb         = require( 'gulp-csscomb' );
+var eslint          = require( 'gulp-eslint' );
 
 
-var BUILD_DIR = './www';
+
+
+
+var BUILD_DIR = './build';
 
 var JADE_SRC_FILES = './jade/**/*.jade';
 
@@ -61,7 +61,6 @@ gulp.task( 'jade', function( )
 
 gulp.task( 'inject', function( )
 {
-    console.log( CSS_FILES );
     var injectOptions = 
     {
       //ignorePath: 'www',
@@ -167,7 +166,10 @@ gulp.task( 'images', function(  )
 } );
 
 
-
+gulp.task( 'clean', function( callback )
+{
+    rimraf( './' + BUILD_DIR, callback );
+} );
 
 gulp.task( 'watch', function(  )
 {
@@ -201,36 +203,9 @@ gulp.task( 'connect', function(  )
         middleware: function( connect, opt )
         {
             // This get's rid of the # symbol in the URL
-            return[ historyApiFallback ];
+            return[ noHash ];
         }
     } );
-} );
-
-
-
-gulp.task( 'install', [ 'git-check' ], function(  )
-{
-  return bower.commands.install(  )
-    .on('log', function( data )
-    {
-      gutil.log( 'bower', gutil.colors.cyan( data.id ), data.message );
-    } );
-} );
-
-gulp.task( 'git-check', function( done )
-{
-  if ( !sh.which( 'git' ) )
-  {
-    console.log(
-      '  ' + gutil.colors.red('Git is not installed.'),
-      '\n  Git, the version control system, is required to download Ionic.',
-      '\n  Download git here:', gutil.colors.cyan('http://git-scm.com/downloads') + '.',
-      '\n  Once git is installed, run \'' + gutil.colors.cyan( 'gulp install' ) + '\' again.'
-    );
-    process.exit( 1 );
-  }
-
-  done(  );
 } );
 
 
@@ -238,11 +213,15 @@ gulp.task( 'git-check', function( done )
 gulp.task( 'default', function(  )
 {
     runSequence(
-        'sass',
-        'scripts',
-        'jade',
+        'clean',
+        [
+            'sass',
+            'scripts',
+            'jade',
+            'images'
+        ],
         'inject',
-        'images',
+        'connect',
         'watch'
     );   
 } );
