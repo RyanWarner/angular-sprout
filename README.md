@@ -17,7 +17,7 @@ An opinionated starting point for AngularJS web applications.
 1. [NodeJS](http://nodejs.org/)
 	- `brew install node`
 1. [Gulp](http://gulp.com/)
-	- npm install --global gulp
+	- `npm install --global gulp`
 
 ### Setup
 
