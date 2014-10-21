@@ -11,7 +11,7 @@ An opinionated starting point for AngularJS web applications.
 
 ## Local Setup
 
-### Prerequisates
+### Prerequisites
 1. [Homebrew](http://brew.sh/)
 	- `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 1. [NodeJS](http://nodejs.org/)
