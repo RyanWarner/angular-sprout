@@ -19,7 +19,7 @@ var scsslint        = require( 'gulp-scss-lint' );
 var csscomb         = require( 'gulp-csscomb' );
 var eslint          = require( 'gulp-eslint' );
 
-
+var karma = require('karma').server;
 
 
 
@@ -48,6 +48,15 @@ var handleError = function( err )
     gutil.beep;
     this.emit( 'end' );
 };
+
+gulp.task( 'tests', function( done )
+{
+    karma.start( {
+
+        configFile: __dirname + '/karma.conf.js'
+
+    }, done );
+} );
 
 
 
