@@ -7,7 +7,7 @@ appSeed.controller( 'RootController', function( $rootScope, $scope )
 
 	// This is a controller.
 
-	$scope.firstName = 'Ryan';
+	$scope.isControllerActive = 'yes';
 
 	console.log( 'Controller active!' );
 
