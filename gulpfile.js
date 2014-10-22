@@ -12,6 +12,7 @@ var prefix          = require( 'gulp-autoprefixer' );
 
 var mainBowerFiles  = require( 'main-bower-files' );
 var inject          = require( 'gulp-inject' );
+var angularFilesort = require( 'gulp-angular-filesort' )
 
 var jade            = require( 'gulp-jade' );
 
@@ -25,18 +26,18 @@ var karma = require('karma').server;
 
 var BUILD_DIR = './build';
 
-var JADE_SRC_FILES = './jade/**/*.jade';
+var JADE_SRC_FILES = './app/**/*.jade';
+var HTML_OUTPUT = BUILD_DIR;
 
 var SASS_SRC_DIR   = './sass';
 var SASS_SRC_FILES = './sass/**/*.scss';
 var CSS_DIR        = BUILD_DIR + '/css'
 var CSS_FILES      = CSS_DIR + '/**/*.css';
 
-var SCRIPTS_SRC_DIR      = './scripts/';
-var SCRIPTS_SRC_FILES    = './scripts/**/*.js';
-var SCRIPTS_OUTPUT_FILES = BUILD_DIR + '/scripts/**/*.js';
+var SCRIPTS_SRC_FILES    = [ './app/**/*.js', './app/*.js' ];
+var SCRIPTS_OUTPUT_FILES = BUILD_DIR;
 
-var BOWER_DIR       = BUILD_DIR + '/scripts/bower';
+var BOWER_DIR       = BUILD_DIR + '/bower';
 var BOWER_CSS_FILES = BOWER_DIR + '/**/*.css';
 var BOWER_JS_FILES  = BOWER_DIR + '/**/*.js';
 
@@ -67,14 +68,13 @@ gulp.task( 'jade', function( )
     return gulp.src( JADE_SRC_FILES )
         .pipe( jade( { pretty: true } ) )
         .on( 'error', handleError )
-        .pipe( gulp.dest( BUILD_DIR ) );
+        .pipe( gulp.dest( HTML_OUTPUT ) );
 } );
 
 gulp.task( 'inject', function( )
 {
     var injectOptions = 
     {
-      ignorePath: 'scripts/bower/**/*.*',
       relative: true,
       addRootSlash: false
     };
@@ -93,7 +93,9 @@ gulp.task( 'inject', function( )
         .pipe( inject( gulp.src( [ './www/css/main.css' ], { read: false } ), injectOptions ) )
         
         .pipe( inject( gulp.src( [ BOWER_JS_FILES ], { read: false } ), bowerInjectOptions ) )
-        .pipe( inject( gulp.src( [ BUILD_DIR + '/scripts/**/*.js', '!' + BUILD_DIR + '/scripts/bower/**/*.*' ], { read: false } ), injectOptions ) )
+        .pipe( inject( 
+                gulp.src( [ BUILD_DIR + '/**/*.js', '!' + BUILD_DIR + '/bower/**/*.*' ], { read: false } )
+                .pipe( angularFilesort(  ) ), injectOptions ) )
         .on( 'error', handleError )
         
         .pipe( gulp.dest( BUILD_DIR ) );
@@ -164,7 +166,7 @@ gulp.task( 'scripts', [ 'eslint', 'bower-files' ], function( )
     // Copy scripts
 
     return gulp.src( SCRIPTS_SRC_FILES )
-        .pipe( gulp.dest( BUILD_DIR + '/scripts' ) );
+        .pipe( gulp.dest( BUILD_DIR ) );
 } );
 
 
