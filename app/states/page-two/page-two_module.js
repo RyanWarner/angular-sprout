@@ -15,7 +15,7 @@ pageTwo.config( function( $stateProvider )
 		{
 			'page':
 			{
-				templateUrl: 'states/page-two/page-two.html',
+				templateUrl: 'states/page-two/page-two_template.html',
 				controller: 'PageTwoController'
 			}
 		}

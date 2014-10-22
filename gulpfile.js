@@ -1,8 +1,8 @@
 var gulp            = require( 'gulp' );
 var gutil           = require( 'gulp-util' );
 var connect         = require( 'gulp-connect' );
-var browserSync     = require( 'browser-sync' );
-var reload          = browserSync.reload;
+//var browserSync     = require( 'browser-sync' );
+//var reload          = browserSync.reload;
 var rimraf          = require( 'rimraf' );
 
 var runSequence     = require( 'run-sequence' );
@@ -49,6 +49,21 @@ var handleError = function( err )
     gutil.beep;
     this.emit( 'end' );
 };
+
+gulp.task( 'connect', function(  )
+{
+    connect.server(
+    {
+        root: BUILD_DIR,
+        hostname: '0.0.0.0',
+        livereload: true,
+        middleware: function( connect, opt )
+        {
+            // This get's rid of the # symbol in the URL
+            return[ noHash ];
+        }
+    } );
+} );
 
 gulp.task( 'tests', function( done )
 {
@@ -128,7 +143,7 @@ gulp.task( 'sass', [ 'scss-lint' ], function(  )
         .pipe( prefix( 'last 2 versions', { cascade: true } ) )
         .on( 'error', handleError )
         .pipe( gulp.dest( BUILD_DIR + '/css' ) )
-        .pipe( reload( { stream: true } ) );
+        .pipe( connect.reload(  ) );
 } );
 
 
@@ -207,41 +222,28 @@ gulp.task( 'watch', function(  )
     } );
 } );
 
-gulp.task( 'connect', function(  )
-{
-    connect.server(
-    {
-        root: BUILD_DIR,
-        hostname: '0.0.0.0',
-        livereload: true,
-        middleware: function( connect, opt )
-        {
-            // This get's rid of the # symbol in the URL
-            return[ noHash ];
-        }
-    } );
-} );
 
-gulp.task( 'browser-sync', function(  )
-{
-    browserSync( {
 
-        server:
-        {
-            baseDir: BUILD_DIR
-        },
-        middleware: function (req, res, next)
-        {
-            return[ noHash ];
-        },
-        ghostMode: {
-                links: false
-            },
-        port: 8080,
-        open: false
+// gulp.task( 'browser-sync', function(  )
+// {
+//     browserSync( {
 
-    } );
-} );
+//         server:
+//         {
+//             baseDir: BUILD_DIR
+//         },
+//         middleware: function (req, res, next)
+//         {
+//             return[ noHash ];
+//         },
+//         ghostMode: {
+//                 links: false
+//             },
+//         port: 8080,
+//         open: false
+
+//     } );
+// } );
 
 
 

@@ -63,6 +63,18 @@ I still have many questions to answer and best practices to discover, and when I
 
 [squint-style](https://github.com/RyanWarner/squint-style)
 
+### File Naming Conventions
+
+`[ parent-name ] . [ child-name ] _ [ type ] . [ file extension ]`
+
+```
+home.about_module.js
+home.about_routes.js
+home.about_controller.js
+home.about_tests.js
+home.about_template.jade
+```
+
 ## Further Reading
 
 - [Angular App Structure Best Practices](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/mobilebasic?pli=1)

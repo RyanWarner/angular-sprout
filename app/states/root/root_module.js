@@ -14,7 +14,7 @@ root.config( function( $stateProvider )
 		{
 			'root':
 			{
-				templateUrl: 'states/root/root.html',
+				templateUrl: 'states/root/root_template.html',
 				controller: 'RootController'
 			}
 		}
