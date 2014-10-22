@@ -49,9 +49,15 @@ I still have many questions to answer and best practices to discover, and when I
 
 ### Test Suite
 
+#### Unit Tests
+
 - [Karma](http://karma-runner.github.io/)
 - [Mocha](http://mochajs.github.io/mocha/)
 - [Sinon-Chai](https://github.com/domenic/sinon-chai)
+
+#### End to End
+
+**To do**: learn to use [protractor](https://github.com/angular/protractor) and create a Gulp task using [gulp-protractor](https://github.com/mllrsohn/gulp-protractor)
 
 
 
@@ -68,12 +74,12 @@ I still have many questions to answer and best practices to discover, and when I
 `[ parent-name ] . [ child-name ] _ [ type ] . [ file extension ]`
 
 ```
-home.about_module.js
-home.about_routes.js
-home.about_controller.js
-home.about_tests.js
-home.about_template.jade
+home-page.about_module.js
+home-page.about_controller.js
+home-page.about_tests.js
+home-page.about_template.jade
 ```
+Use hyphens for state or component names, with child states separated by periods. Tag the end of each file with an underscore followed by the specific function of the file.
 
 ## Further Reading
 
