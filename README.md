@@ -29,9 +29,12 @@ An opinionated starting point for AngularJS web applications.
 
 ### Test Suite
 
+Tests are
 - [Karma](http://karma-runner.github.io/)
 - [Mocha](http://mochajs.github.io/mocha/)
 - [Sinon-Chai](https://github.com/domenic/sinon-chai)
+
+
 
 ### Running Tests
 
