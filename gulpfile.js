@@ -41,6 +41,7 @@ var BOWER_DIR       = BUILD_DIR + '/bower';
 var BOWER_CSS_FILES = BOWER_DIR + '/**/*.css';
 var BOWER_JS_FILES  = BOWER_DIR + '/**/*.js';
 
+var LINTERS_DIR = './linters'
 
 
 var handleError = function( err )
@@ -131,7 +132,7 @@ gulp.task( 'csscomb', function (  )
 gulp.task( 'scss-lint', [ 'csscomb' ], function(  )
 {
     return gulp.src( SASS_SRC_FILES )
-        .pipe( scsslint( { 'config': 'scss-linting-config.yml' } ) )
+        .pipe( scsslint( { config: 'scss-linting-config.yml' } ) )
         .on( 'error', handleError );
 } );
 

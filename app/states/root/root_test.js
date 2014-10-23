@@ -1,3 +1,5 @@
+'use strict';
+
 describe( 'My Root Controller', function(  )
 {
 	var scope;

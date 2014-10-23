@@ -29,6 +29,66 @@ I still have many questions to answer and best practices to discover, and when I
 - [Sass](http://sass-lang.com/)
 - [Gulp](http://gulp.com/)
 
+## File Structure
+
+```
+app/
+	states/
+		root/
+			page-one/
+				page-one_controller.js
+				page-one_module.js
+				page-one_styles.scss
+				page-one_template.jade
+				page-one_tests.js
+			page-two/
+				page-two_controler.js
+				page-two_module.js
+				page-two_styles.scss
+				page-two_template.jade
+				page-two_tests.js
+	common-components/
+		directives/
+			dropdown/
+				dropdown_controller.js
+				dropdown_directive.js
+				dropdown_styles.scss
+				dropdown_template.jade
+		filters/
+			reverse/
+				reverse_filter.js
+		services/
+	common-styles/
+		_base.scss
+		_breakpoints.scss
+		_mixins.scss
+		_reset.scss
+		_variables.scss
+	app_module.js
+	app_styles.scss
+	index.jade
+	
+tests/
+	unit/
+		coverage/
+		karma.conf.js
+	e2e/
+		TBD
+
+bower_components/       // Dynamically created
+node_modules/
+build/
+	
+package.json            // Dependencies
+bower.json
+gulpfile.js
+README.md
+
+.csscomb.json           // Linting config
+.eslintrc
+.scss-linting-config
+```
+
 ## Local Setup
 
 ### Prerequisites
@@ -67,7 +127,7 @@ I still have many questions to answer and best practices to discover, and when I
 
 ## Coding Style
 
-[squint-style](https://github.com/RyanWarner/squint-style)
+angular-sprout uses [squint-style](https://github.com/RyanWarner/squint-style).
 
 ### File Naming Conventions
 
@@ -76,6 +136,7 @@ I still have many questions to answer and best practices to discover, and when I
 ```
 home-page.about_module.js
 home-page.about_controller.js
+home-page.about_style.scss
 home-page.about_tests.js
 home-page.about_template.jade
 ```
