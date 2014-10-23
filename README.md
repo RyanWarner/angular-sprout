@@ -107,9 +107,11 @@ README.md
 
 ## Tests
 
-Unit tests make code robust and easy to change. The [mocha framework](http://mochajs.org/) for its modularity, flexibility, and node.js proficiency.
+Unit tests make code robust and easy to change. The [mocha framework](http://mochajs.org/) was chosen for its modularity, flexibility, and node.js proficiency.
 
 #### Unit Tests
+
+Unit tests define the applications API. Take somet ime to read [An Introduction To Unit Testing In AngularJS Applications](http://www.smashingmagazine.com/2014/10/07/introduction-to-unit-testing-in-angularjs/).
 
 - [Karma](http://karma-runner.github.io/)
 - [Mocha](http://mochajs.github.io/mocha/)
@@ -118,6 +120,8 @@ Unit tests make code robust and easy to change. The [mocha framework](http://moc
 `gulp unit-tests`
 
 #### End to End
+
+End to end tests interact with your interface the same way a user would, in a browser. Try the [protractor tutorial](http://angular.github.io/protractor/#/tutorial).
 
 - [Protractor](https://github.com/angular/protractor)
 
