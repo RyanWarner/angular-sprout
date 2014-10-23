@@ -111,7 +111,7 @@ Unit tests make code robust and easy to change. The [mocha framework](http://moc
 
 #### Unit Tests
 
-Unit tests define the applications API. Take somet ime to read [An Introduction To Unit Testing In AngularJS Applications](http://www.smashingmagazine.com/2014/10/07/introduction-to-unit-testing-in-angularjs/).
+Unit tests define the applications API. Take some time to read [An Introduction To Unit Testing In AngularJS Applications](http://www.smashingmagazine.com/2014/10/07/introduction-to-unit-testing-in-angularjs/).
 
 - [Karma](http://karma-runner.github.io/)
 - [Mocha](http://mochajs.github.io/mocha/)
