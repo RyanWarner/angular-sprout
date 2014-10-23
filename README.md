@@ -18,7 +18,9 @@ However, I found a number of things I wanted to change, add, or remove. Enough t
 
 This project is incomplete. I'm still learning, and I know this seed is missing features.
 
-Would it be smart to use [Closure Compiler](https://developers.google.com/closure/compiler/)? Or maybe [ng-annotate](https://github.com/olov/ng-annotate) with [uglifyjs](https://github.com/mishoo/UglifyJS2)?
+What is the best build practice? Would it be smart to use [Closure Compiler](https://developers.google.com/closure/compiler/)? Or maybe [ng-annotate](https://github.com/olov/ng-annotate) with [uglifyjs](https://github.com/mishoo/UglifyJS2)?
+
+How do I use [protractor](https://github.com/angular/protractor) to write end to end tests?
 
 I still have many questions to answer and best practices to discover, and when I do, this repo will be updated with my findings.
 

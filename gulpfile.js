@@ -1,13 +1,13 @@
 var gulp            = require( 'gulp' );
 var gutil           = require( 'gulp-util' );
 var connect         = require( 'gulp-connect' );
-//var browserSync     = require( 'browser-sync' );
-//var reload          = browserSync.reload;
+
 var rimraf          = require( 'rimraf' );
 
 var runSequence     = require( 'run-sequence' );
 var noHash          = require( 'connect-history-api-fallback' );
 var sass            = require( 'gulp-sass' );
+var bulkSass        = require( 'gulp-sass-bulk-import' );
 var prefix          = require( 'gulp-autoprefixer' );
 
 var mainBowerFiles  = require( 'main-bower-files' );
@@ -29,8 +29,7 @@ var BUILD_DIR = './build';
 var JADE_SRC_FILES = './app/**/*.jade';
 var HTML_OUTPUT = BUILD_DIR;
 
-var SASS_SRC_DIR   = './sass';
-var SASS_SRC_FILES = './sass/**/*.scss';
+var SASS_SRC_FILES = './app/**/*.scss';
 var CSS_DIR        = BUILD_DIR + '/css'
 var CSS_FILES      = CSS_DIR + '/**/*.css';
 
@@ -106,7 +105,7 @@ gulp.task( 'inject', function( )
 
     return target
         .pipe( inject( gulp.src( [ BOWER_CSS_FILES ], { read: false } ), bowerInjectOptions ) )
-        .pipe( inject( gulp.src( [ './www/css/main.css' ], { read: false } ), injectOptions ) )
+        .pipe( inject( gulp.src( [ './build/main.css' ], { read: false } ), injectOptions ) )
         
         .pipe( inject( gulp.src( [ BOWER_JS_FILES ], { read: false } ), bowerInjectOptions ) )
         .pipe( inject( 
@@ -125,8 +124,7 @@ gulp.task( 'inject', function( )
 gulp.task( 'csscomb', function (  )
 {
     return gulp.src( SASS_SRC_FILES )
-        .pipe( csscomb(  ) )
-        .pipe( gulp.dest( './sass' ) );
+        .pipe( csscomb(  ) );
 } );
 
 gulp.task( 'scss-lint', [ 'csscomb' ], function(  )
@@ -136,14 +134,14 @@ gulp.task( 'scss-lint', [ 'csscomb' ], function(  )
         .on( 'error', handleError );
 } );
 
-gulp.task( 'sass', [ 'scss-lint' ], function(  )
+gulp.task( 'sass', function(  )
 {
-    return gulp.src( SASS_SRC_DIR + '/main.scss' )
+    return gulp.src( './app/main.scss' )
         .pipe( sass(  ) )
         .on( 'error', handleError )
         .pipe( prefix( 'last 2 versions', { cascade: true } ) )
         .on( 'error', handleError )
-        .pipe( gulp.dest( BUILD_DIR + '/css' ) )
+        .pipe( gulp.dest( BUILD_DIR ) )
         .pipe( connect.reload(  ) );
 } );
 

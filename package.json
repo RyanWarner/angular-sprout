@@ -48,6 +48,7 @@
     "karma-coverage": "~0.2.6",
     "gulp-angular-filesort": "~1.0.4",
     "csscomb": "~3.0.3",
-    "eslint": "~0.8.2"
+    "eslint": "~0.8.2",
+    "gulp-sass-bulk-import": "~0.1.0"
   }
 }
