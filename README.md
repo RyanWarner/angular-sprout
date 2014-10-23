@@ -40,13 +40,15 @@ app/
 				page-one_module.js
 				page-one_styles.scss
 				page-one_template.jade
-				page-one_tests.js
+				page-one_test-e2e.js
+				page-one_test-unit.js
 			page-two/
 				page-two_controler.js
 				page-two_module.js
 				page-two_styles.scss
 				page-two_template.jade
-				page-two_tests.js
+				page-two_test-e2e.js
+				page-two_test-unit.js
 	common-components/
 		directives/
 			dropdown/
@@ -55,8 +57,7 @@ app/
 				dropdown_styles.scss
 				dropdown_template.jade
 		filters/
-			reverse/
-				reverse_filter.js
+			reverse_filter.js
 		services/
 	common-styles/
 		_base.scss
@@ -69,11 +70,10 @@ app/
 	index.jade
 	
 tests/
-	unit/
-		coverage/
-		karma.conf.js
-	e2e/
-		TBD
+	coverage/
+	karma.config.js
+	protractor.config.js
+
 
 bower_components/       // Dynamically created
 node_modules/
@@ -106,6 +106,8 @@ README.md
 2. `gulp`
 
 ## Tests
+
+Unit tests make code robust and easy to change. The [mocha framework](http://mochajs.org/) for its modularity, flexibility, and node.js proficiency.
 
 #### Unit Tests
 

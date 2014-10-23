@@ -120,7 +120,7 @@ gulp.task( 'inject', function( )
 
     return target
         .pipe( inject( gulp.src( [ BOWER_CSS_FILES ], { read: false } ), bowerInjectOptions ) )
-        .pipe( inject( gulp.src( [ './build/main.css' ], { read: false } ), injectOptions ) )
+        .pipe( inject( gulp.src( [ './build/app_styles.css' ], { read: false } ), injectOptions ) )
         
         .pipe( inject( gulp.src( [ BOWER_JS_FILES ], { read: false } ), bowerInjectOptions ) )
         .pipe( inject( 
@@ -158,7 +158,7 @@ gulp.task( 'scss-lint', [ 'csscomb' ], function(  )
 
 gulp.task( 'sass', function(  )
 {
-    return gulp.src( './app/main.scss' )
+    return gulp.src( './app/app_styles.scss' )
         .pipe( sass(  ) )
         .on( 'error', handleError )
         .pipe( prefix( 'last 2 versions', { cascade: true } ) )
