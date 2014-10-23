@@ -36,7 +36,7 @@ var SASS_SRC_FILES = './app/**/*.scss';
 var CSS_DIR        = BUILD_DIR + '/css'
 var CSS_FILES      = CSS_DIR + '/**/*.css';
 
-var SCRIPTS_SRC_FILES    = [ './app/**/*.js', './app/*.js' ];
+var SCRIPTS_SRC_FILES    = [ './app/**/*.js', './app/*.js', '!./app/**/*_test*.js' ];
 var SCRIPTS_OUTPUT_FILES = BUILD_DIR;
 
 var BOWER_DIR       = BUILD_DIR + '/bower';
@@ -125,7 +125,14 @@ gulp.task( 'inject', function( )
         
         .pipe( inject( gulp.src( [ BOWER_JS_FILES ], { read: false } ), bowerInjectOptions ) )
         .pipe( inject( 
-                gulp.src( [ BUILD_DIR + '/**/*.js', '!' + BUILD_DIR + '/bower/**/*.*' ], { read: false } )
+                gulp.src(
+                    [
+                        BUILD_DIR + '/**/*.js',
+                        '!' + BUILD_DIR + '/bower/**/*.*'
+                    ],
+                    {
+                        read: false
+                    } )
                 .pipe( angularFilesort(  ) ), injectOptions ) )
         .on( 'error', handleError )
         

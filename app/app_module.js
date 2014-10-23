@@ -2,8 +2,7 @@
 
 var appSeed = angular.module( 'appSeed',
 [
-	//'ui.router',
-
+	'exampleDirective',
 	'pageOne',
 	'pageTwo',
 	'root'
@@ -11,7 +10,7 @@ var appSeed = angular.module( 'appSeed',
 
 appSeed.config( function( $urlRouterProvider, $locationProvider )
 {
-	//$urlRouterProvider.otherwise( '/' );
+	$urlRouterProvider.otherwise( '/' );
 	$locationProvider.html5Mode( true );
 } );
 
