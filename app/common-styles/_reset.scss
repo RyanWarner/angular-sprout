@@ -2,6 +2,11 @@
 
 *
 {
+	position: relative;
+	display: flex;
+	flex-flow: column;
+	flex-shrink: 0;
+	overflow: hidden;
 	box-sizing: border-box;
 }
 
