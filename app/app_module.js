@@ -1,14 +1,17 @@
 'use strict';
 
-var appSeed = angular.module( 'appSeed',
+var angularSprout = angular.module( 'angularSprout',
 [
 	'exampleDirective',
+
+	'reverseFilter',
+
 	'pageOne',
 	'pageTwo',
 	'root'
 ] );
 
-appSeed.config( function( $urlRouterProvider, $locationProvider )
+angularSprout.config( function( $urlRouterProvider, $locationProvider )
 {
 	$urlRouterProvider.otherwise( '/' );
 	$locationProvider.html5Mode( true );
@@ -17,7 +20,7 @@ appSeed.config( function( $urlRouterProvider, $locationProvider )
 
 
 
-appSeed.run( [ '$rootScope', function( $rootScope )
+angularSprout.run( [ '$rootScope', function( $rootScope )
 {
 	$rootScope.$on( '$stateChangeSuccess', function( toState, toParams, fromState, fromParams )
 	{
