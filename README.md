@@ -117,15 +117,13 @@ README.md
 - [Mocha](http://mochajs.github.io/mocha/)
 - [Sinon-Chai](https://github.com/domenic/sinon-chai)
 
+`gulp unit-tests`
+
 #### End to End
 
-**To do**: learn to use [protractor](https://github.com/angular/protractor) and create a Gulp task using [gulp-protractor](https://github.com/mllrsohn/gulp-protractor)
+- [Protractor](https://github.com/angular/protractor)
 
-
-
-### Running Tests
-
-`gulp tests`
+`gulp protractor`
 
 ## Coding Style
 

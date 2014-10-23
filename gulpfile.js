@@ -20,7 +20,10 @@ var scsslint        = require( 'gulp-scss-lint' );
 var csscomb         = require( 'gulp-csscomb' );
 var eslint          = require( 'gulp-eslint' );
 
-var karma           = require( 'karma' ).server;
+var karma                 = require( 'karma' ).server;
+var protractor            = require( 'gulp-protractor' ).protractor;
+var webdriver_standalone  = require( 'gulp-protractor' ).webdriver_standalone;
+var webdriver_update      = require( 'gulp-protractor' ).webdriver_update;
 
 
 
@@ -41,6 +44,8 @@ var BOWER_CSS_FILES = BOWER_DIR + '/**/*.css';
 var BOWER_JS_FILES  = BOWER_DIR + '/**/*.js';
 
 var LINTERS_DIR = './linters'
+
+var E2E_TESTS = [ './app/**/*_test-e2e.js' ];
 
 
 var handleError = function( err )
@@ -65,7 +70,7 @@ gulp.task( 'connect', function(  )
     } );
 } );
 
-gulp.task( 'tests', function( done )
+gulp.task( 'unit-tests', function( done )
 {
     karma.start( {
 
@@ -74,7 +79,18 @@ gulp.task( 'tests', function( done )
     }, done );
 } );
 
+gulp.task( 'update-webdriver', webdriver_update );
 
+gulp.task( 'protractor', [ 'update-webdriver' ], function( done )
+{
+    gulp.src( E2E_TESTS )
+        .pipe( protractor( {
+
+            configFile: __dirname + '/tests/protractor.config.js'
+
+        } ) )
+        .on( 'error', handleError );
+} );
 
 // Jade.
 

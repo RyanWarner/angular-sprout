@@ -7,7 +7,7 @@ pageOne.controller( 'PageOneController', function( $rootScope, $scope )
 
 	// This is a controller.
 
-	$scope.isControllerActive = 'yes';
+	$scope.stateName = 'page-one';
 
 	console.log( 'PageOneController active!' );
 
