@@ -109,8 +109,6 @@ README.md
 
 ## Tests
 
-### Test Suite
-
 #### Unit Tests
 
 - [Karma](http://karma-runner.github.io/)
