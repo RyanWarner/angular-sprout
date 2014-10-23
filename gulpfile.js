@@ -7,7 +7,6 @@ var rimraf          = require( 'rimraf' );
 var runSequence     = require( 'run-sequence' );
 var noHash          = require( 'connect-history-api-fallback' );
 var sass            = require( 'gulp-sass' );
-var bulkSass        = require( 'gulp-sass-bulk-import' );
 var prefix          = require( 'gulp-autoprefixer' );
 
 var mainBowerFiles  = require( 'main-bower-files' );

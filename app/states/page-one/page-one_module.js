@@ -16,7 +16,7 @@ pageOne.config( function( $stateProvider )
 			'page':
 			{
 				templateUrl: 'states/page-one/page-one_template.html',
-				controller: 'PageOneController'
+				controller: 'PageOneController as pageOne'
 			}
 		}
 	} );
