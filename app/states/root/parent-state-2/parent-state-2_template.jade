@@ -1,2 +1,7 @@
-.page-two
-	| page 2
+.child-nav
+	.child-nav-item( ui-sref='root.parent-state-2.child-state-1', ng-class='{ selected: activeChildNav === "child-state-1" }' )
+		| child-state-1
+	.child-nav-item( ui-sref='root.parent-state-2.child-state-2', ng-class='{ selected: activeChildNav === "child-state-2" }' )
+		| child-state-2
+
+.child-content( ui-view='child-content' )

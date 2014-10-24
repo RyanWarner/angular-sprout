@@ -2,7 +2,7 @@
 
 var grandparentState3 = angular.module( 'grandparentState3' );
 
-grandparentState3.controller( 'PageOneController', function( $rootScope, $scope )
+grandparentState3.controller( 'GrandparentState3Controller', function( $rootScope, $scope )
 {
 
 	// This is a controller.

@@ -18,6 +18,7 @@ state1.config( function( $stateProvider )
 				templateUrl: 'states/root/state-1/state-1_template.html',
 				controller: 'State1Controller as state1'
 			}
-		}
+		},
+		activeTopNav: 'state-1'
 	} );
 } );

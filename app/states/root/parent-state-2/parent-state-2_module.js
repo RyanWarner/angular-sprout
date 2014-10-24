@@ -2,7 +2,10 @@
 
 var parentState2 = angular.module( 'parentState2',
 [
-	'ui.router'
+	'ui.router',
+
+	'childState1',
+	'childState2'
 ] );
 
 
@@ -18,6 +21,7 @@ parentState2.config( function( $stateProvider )
 				templateUrl: 'states/root/parent-state-2/parent-state-2_template.html',
 				controller: 'ParentState2Controller as parentState2'
 			}
-		}
+		},
+		activeTopNav: 'parent-state-2'
 	} );
 } );

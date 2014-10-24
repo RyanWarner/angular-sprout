@@ -18,6 +18,7 @@ grandparentState3.config( function( $stateProvider )
 				templateUrl: 'states/root/grandparent-state-3/grandparent-state-3_template.html',
 				controller: 'GrandparentState3Controller as grandparentState3'
 			}
-		}
+		},
+		activeTopNav: 'grandparent-state-3'
 	} );
 } );

@@ -7,6 +7,7 @@ var angularSprout = angular.module( 'angularSprout',
 	'reverseFilter',
 
 	'root',
+
 	'state1',
 	'parentState2',
 	'grandparentState3'
