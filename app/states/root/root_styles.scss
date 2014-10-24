@@ -18,7 +18,7 @@
 
 section
 {
-	margin: 26px;
+	margin: 26px 26px 8px 26px;
 	padding: 18px 15px 18px 15px;
 	border: 1px solid #dedad7;
 	border-left: 4px solid #dedad7;
@@ -137,6 +137,7 @@ section
 	box-shadow: 1px 1px 5px 0 rgba( 0, 0, 0, 0.2 );
 
 	color: $dark;
+	text-decoration: none;
 
 	transition: all 0.1s ease-in;
 
@@ -144,6 +145,12 @@ section
 	align-items: center;
 	justify-content: center;
 	align-self: center;
+
+	&:active,
+	&:visited
+	{
+		color: $dark;
+	}
 
 	&:hover
 	{

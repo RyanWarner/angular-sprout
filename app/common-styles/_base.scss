@@ -33,25 +33,26 @@ p
 	line-height: 24px;
 
 	flex-flow: row;
+	flex-wrap: wrap;
 }
 
 a
 {
-	color: #5567d7;
+	color: #4e88d4;
 
 	&:hover
 	{
-		color: #8b55d7;
+		color: #58beed;
 	}
 
 	&:active
 	{
-		color: #0e62c2;
+		color: #4578ba;
 	}
 
 	&:visited
 	{
-		color: #e79952;
+		color: #4e88d4;
 	}
 }
 

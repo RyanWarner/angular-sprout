@@ -135,7 +135,8 @@ gulp.task( 'inject', function( )
                 .pipe( angularFilesort(  ) ), injectOptions ) )
         .on( 'error', handleError )
         
-        .pipe( gulp.dest( BUILD_DIR ) );
+        .pipe( gulp.dest( BUILD_DIR ) )
+        .pipe( connect.reload(  ) );
 } );
 
 
