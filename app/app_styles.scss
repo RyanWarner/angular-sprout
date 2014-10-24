@@ -6,6 +6,6 @@
 
 @import 'states/root/root_styles';
 
-@import 'states/page-one/page-one_styles';
-
-@import 'states/page-two/page-two_styles';
+@import 'states/root/state-1/state-1_styles';
+@import 'states/root/parent-state-2/parent-state-2_styles';
+@import 'states/root/grandparent-state-3/grandparent-state-3_styles';

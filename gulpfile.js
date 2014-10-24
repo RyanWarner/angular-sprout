@@ -147,7 +147,8 @@ gulp.task( 'csscomb', function (  )
 {
     return gulp.src( SASS_SRC_FILES )
         .pipe( csscomb(  ) )
-        .on( 'error', handleError );
+        .on( 'error', handleError )
+        .pipe( gulp.dest( './app' ) );
 } );
 
 gulp.task( 'scss-lint', [ 'csscomb' ], function(  )

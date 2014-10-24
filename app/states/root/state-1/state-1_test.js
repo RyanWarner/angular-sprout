@@ -8,17 +8,17 @@ describe( 'My Root Controller', function(  )
 	beforeEach( function(  )
 	{
 		module( 'angularSprout' );
-		module( 'root' );
+		module( 'state1' );
 	} );
 
 	beforeEach( inject( function( $rootScope, $controller )
 	{
 		scope = $rootScope.$new(  );
-		controller = $controller( 'RootController', { $scope: scope } );
+		controller = $controller( 'State1Controller', { $scope: scope } );
 	} ) );
 
 	it( 'should have a scope variable', function(  )
 	{
-		expect( scope.isControllerActive ).to.equal( 'yes' );
+		expect( scope.stateName ).to.equal( 'state-1' );
 	} );
 } );

@@ -7,14 +7,14 @@ describe( 'My Root Controller', function(  )
 
 	beforeEach( function(  )
 	{
-		module( 'appSeed' );
-		module( 'pageOne' );
+		module( 'angularSprout' );
+		module( 'grandparentState3' );
 	} );
 
 	beforeEach( inject( function( $rootScope, $controller )
 	{
 		scope = $rootScope.$new(  );
-		controller = $controller( 'PageOneController', { $scope: scope } );
+		controller = $controller( 'GrandparentState3Controller', { $scope: scope } );
 	} ) );
 
 	it( 'should have a scope variable', function(  )

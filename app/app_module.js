@@ -6,9 +6,11 @@ var angularSprout = angular.module( 'angularSprout',
 
 	'reverseFilter',
 
-	'pageOne',
-	'pageTwo',
-	'root'
+	'root',
+	'state1',
+	'parentState2',
+	'grandparentState3'
+
 ] );
 
 angularSprout.config( function( $urlRouterProvider, $locationProvider )

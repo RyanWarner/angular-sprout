@@ -2,17 +2,95 @@
 {
 	position: fixed;
 	width: 236px;
+	height: 100%;
 	top: 0;
 	left: 0;
 	background-color: $dark;
-	height: 100%;
+
 	color: $light;
 }
 
 .logo
 {
 	width: inherit;
-	flex-flow: row;
-	background-color: $brick;
 	height: 62px;
+	background-color: $brick;
+
+	flex-flow: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.logo-text
+{
+	font-size: 18px;
+}
+
+.nav-item
+{
+	cursor: pointer;
+	height: 64px;
+
+	font-size: 14px;
+
+	flex-flow: row;
+	align-items: center;
+
+	&:before
+	{
+		content: '';
+		display: inline-block;
+		width: 8px;
+		height: 8px;
+		margin-right: 14px;
+		margin-left: 14px;
+		border: 1px solid #979797;
+		border-radius: 5px;
+
+		transition: all 0.1s ease-in;
+	}
+
+	&.selected
+	{
+		&:before
+		{
+			border: 1px solid #4a4a4a;
+			background-color: $mint;
+		}
+	}
+
+	&:hover
+	{
+		background-color: lighten( $dark, 5% );
+
+		&:before
+		{
+			width: 6px;
+			height: 6px;
+		}
+	}
+}
+
+.github-button
+{
+	cursor: pointer;
+	width: 137px;
+	height: 48px;
+	margin-top: 100px;
+	background-color: $light;
+	box-shadow: 1px 1px 5px 0 rgba( 0, 0, 0, 0.2 );
+
+	color: $dark;
+
+	transition: all 0.1s ease-in;
+
+	flex-flow: row;
+	align-items: center;
+	justify-content: center;
+	align-self: center;
+
+	&:hover
+	{
+		background-color: lighten( $light, 5% );
+	}
 }
