@@ -1,10 +1,18 @@
-h2
-	| root
-nav
-	div
-		a( ui-sref="root.page-one" )
-			| page-one
-	div
-		a( ui-sref="root.page-two" )
-			| page-two
-div( ui-view="page" )
+.left-column
+	.logo
+		.name
+			| angular-sprout
+		.icon
+	nav
+		li( ui-sref='' )
+			| parent-state-1
+		li( ui-sref='' )
+			| state-2
+		li( ui-sref='' )
+			| grandparent-state-3
+	.github-button
+		.button-text
+			| GitHub
+		.button-icon
+
+.content( ui-view='content' )

@@ -1,0 +1,18 @@
+.left-column
+{
+	position: fixed;
+	width: 236px;
+	top: 0;
+	left: 0;
+	background-color: $dark;
+	height: 100%;
+	color: $light;
+}
+
+.logo
+{
+	width: inherit;
+	flex-flow: row;
+	background-color: $brick;
+	height: 62px;
+}

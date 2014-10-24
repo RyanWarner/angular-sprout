@@ -13,9 +13,9 @@
 body,
 html
 {
-	background-color: $white;
+	background-color: $light;
 
-	color: $black;
+	color: $dark;
 	font-family: $helvetica;
 }
 
@@ -33,11 +33,11 @@ p
 
 a
 {
-	color: #0f6ad4;
+	color: #5567d7;
 
 	&:hover
 	{
-		color: #5da8ff;
+		color: #8b55d7;
 	}
 
 	&:active

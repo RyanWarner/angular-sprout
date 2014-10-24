@@ -146,7 +146,8 @@ gulp.task( 'inject', function( )
 gulp.task( 'csscomb', function (  )
 {
     return gulp.src( SASS_SRC_FILES )
-        .pipe( csscomb(  ) );
+        .pipe( csscomb(  ) )
+        .on( 'error', handleError );
 } );
 
 gulp.task( 'scss-lint', [ 'csscomb' ], function(  )
@@ -156,7 +157,7 @@ gulp.task( 'scss-lint', [ 'csscomb' ], function(  )
         .on( 'error', handleError );
 } );
 
-gulp.task( 'sass', function(  )
+gulp.task( 'sass', [ 'scss-lint' ], function(  )
 {
     return gulp.src( './app/app_styles.scss' )
         .pipe( sass(  ) )
