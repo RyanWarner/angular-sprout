@@ -1,6 +1,6 @@
 'use strict';
 
-var parentState2 = angular.module( 'parent-state-2' );
+var parentState2 = angular.module( 'parentState2' );
 
 parentState2.controller( 'ParentState2Controller', function( $rootScope, $scope )
 {

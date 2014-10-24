@@ -13,9 +13,9 @@ parentState2.config( function( $stateProvider )
 		url: 'parent-state-2',
 		views:
 		{
-			'page':
+			'content':
 			{
-				templateUrl: 'states/parent-state-2/parent-state-2_template.html',
+				templateUrl: 'states/root/parent-state-2/parent-state-2_template.html',
 				controller: 'ParentState2Controller as parentState2'
 			}
 		}

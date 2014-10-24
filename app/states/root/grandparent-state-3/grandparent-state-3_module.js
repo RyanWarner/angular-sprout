@@ -13,9 +13,9 @@ grandparentState3.config( function( $stateProvider )
 		url: 'grandparent-state-3',
 		views:
 		{
-			'page':
+			'content':
 			{
-				templateUrl: 'states/grandparent-state-3/grandparent-state-3_template.html',
+				templateUrl: 'states/root/grandparent-state-3/grandparent-state-3_template.html',
 				controller: 'GrandparentState3Controller as grandparentState3'
 			}
 		}

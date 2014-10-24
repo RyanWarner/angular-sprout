@@ -13,9 +13,9 @@ state1.config( function( $stateProvider )
 		url: 'state-1',
 		views:
 		{
-			'page':
+			'content':
 			{
-				templateUrl: 'states/state-1/state-1_template.html',
+				templateUrl: 'states/root/state-1/state-1_template.html',
 				controller: 'State1Controller as state1'
 			}
 		}

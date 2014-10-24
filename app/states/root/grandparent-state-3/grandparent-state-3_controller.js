@@ -1,6 +1,6 @@
 'use strict';
 
-var grandparentState3 = angular.module( 'grandparent-state-3' );
+var grandparentState3 = angular.module( 'grandparentState3' );
 
 grandparentState3.controller( 'PageOneController', function( $rootScope, $scope )
 {

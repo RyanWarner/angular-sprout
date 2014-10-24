@@ -10,6 +10,23 @@
 	color: $light;
 }
 
+.content
+{
+	width: calc( 100% - 236px );
+	margin-left: 236px;
+}
+
+section
+{
+	margin: 26px;
+	padding: 18px 15px 18px 15px;
+	border: 1px solid #dedad7;
+	border-left: 4px solid #dedad7;
+	background-color: #fcf8f5;
+
+	flex: 1;
+}
+
 .logo
 {
 	width: inherit;
