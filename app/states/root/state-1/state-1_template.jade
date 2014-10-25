@@ -12,7 +12,46 @@ section
 		a( href='' )
 			| angular-seed
 		span
-			| .
+			| .&nbsp;
+		span
+			| This means that each state and component has its own module and controller.
+	p
+		| You can use angular-sprout to quickly get your Angular develpment environment up and running.
+		| Simply clone the git repository, install dependencies, and run gulp.
+section
+	h1
+		| Stack
+	ul.stack-row
+		li.stack-item
+			.stack-item-logo.angular-logo
+			.stack-item-text
+				h2
+					| Angular
+				.stack-item-description
+					| blah blah blah
+		li.stack-item
+			.stack-item-logo.gulp-logo
+			.stack-item-text
+				h2
+					| Gulp
+				.stack-item-description
+					| blah blah blah
+	ul.stack-row
+		li.stack-item
+			.stack-item-logo.jade-logo
+			.stack-item-text
+				h2
+					| Jade
+				.stack-item-description
+					| Because closing tags are annoying.
+		li.stack-item
+			.stack-item-logo.sass-logo
+			.stack-item-text
+				h2
+					| Sass
+				.stack-item-description
+					| blah blah blah
+
 section
 	h1
 		| root.state-1
@@ -21,3 +60,30 @@ section
 	pre
 		| app/
 		|    states/
+		|        root/
+		| 
+		span.highted-code
+			|            state-1/
+			|                state-1_controller.js
+			|                state-1_module.js
+			|                state-1_styles.scss
+			|                state-1_template.jade
+			|                state-1_test-e2e.js
+			|                state-1_test-unit.js
+		| 
+		|            parent-state-2/
+		|                child-state-1/
+		|                    child-state-1_controler.js
+		|                    child-state-1_module.js
+		|                    child-state-1_styles.scss
+		|                    child-state-1_template.jade
+		|                    child-state-1_test-e2e.js
+		|                    child-state-1_test-unit.js
+		|                child-state-2
+		|                    child-state-2_controler.js
+		|                    child-state-2_module.js
+		|                    child-state-2_styles.scss
+		|                    child-state-2_template.jade
+		|                    child-state-2_test-e2e.js
+		|                    child-state-2_test-unit.js
+		|    common-components/

@@ -1,3 +1,73 @@
+h2
+{
+	margin-bottom: 8px;
+
+	font-size: 18px;
+}
+
+h1
+{
+	padding-bottom: 18px;
+	border-bottom: 1px solid #dedad7;
+}
+
+.stack-row
+{
+	margin-bottom: 60px;
+
+	flex-flow: row;
+
+	&:last-child
+	{
+		margin-bottom: 0;
+	}
+}
+
+.stack-item
+{
+	flex: 1;
+	flex-flow: row;
+	align-items: center;
+}
+
+.stack-item-logo
+{
+	width: 92px;
+	height: 92px;
+	margin-right: 10px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.stack-item-text
+{
+	max-width: 250px;
+}
+
+.angular-logo
+{
+	background-image: url( 'images/angular.png' );
+	background-size: 67px 67px;
+}
+
+.gulp-logo
+{
+	background-image: url( 'images/gulp.png' );
+	background-size: 38px 85px;
+}
+
+.jade-logo
+{
+	background-image: url( 'images/jade.svg' );
+	background-size: 61px 42px;
+}
+
+.sass-logo
+{
+	background-image: url( 'images/sass.png' );
+	background-size: 68px 51px;
+}
+
 .left-column
 {
 	position: fixed;
@@ -27,9 +97,9 @@ section
 	flex: 1;
 }
 
-code
+.highted-code
 {
-	background-color: $mint ;
+	color: #de4d29;
 }
 
 .child-nav
@@ -88,6 +158,14 @@ code
 .logo-text
 {
 	font-size: 18px;
+}
+
+.logo-icon
+{
+	width: 26px;
+	height: 26px;
+	margin-left: 12px;
+	background-image: url( 'images/flower.svg' );
 }
 
 .nav-item
@@ -161,4 +239,12 @@ code
 	{
 		background-color: lighten( $light, 5% );
 	}
+}
+
+.button-icon
+{
+	width: 25px;
+	height: 25px;
+	margin-right: 10px;
+	background-image: url( 'images/github.svg' );
 }

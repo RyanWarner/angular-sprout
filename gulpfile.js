@@ -214,7 +214,7 @@ gulp.task( 'scripts', [ 'eslint', 'bower-files' ], function( )
 
 gulp.task( 'images', function(  )
 {
-    return gulp.src( 'images/**/*' )
+    return gulp.src( './images/**/*' )
         .pipe( gulp.dest( BUILD_DIR + '/images/' ) );
 } );
 
