@@ -35,20 +35,42 @@ I still have many questions to answer and best practices to discover, and when I
 app/
 	states/
 		root/
-			page-one/
-				page-one_controller.js
-				page-one_module.js
-				page-one_styles.scss
-				page-one_template.jade
-				page-one_test-e2e.js
-				page-one_test-unit.js
-			page-two/
-				page-two_controler.js
-				page-two_module.js
-				page-two_styles.scss
-				page-two_template.jade
-				page-two_test-e2e.js
-				page-two_test-unit.js
+			grandparent-state-3/
+				grandparent-state-3_controler.js
+				grandparent-state-3_module.js
+				grandparent-state-3_styles.scss
+				grandparent-state-3_template.jade
+				grandparent-state-3_test-e2e.js
+				grandparent-state-3_test-unit.js
+			parent-state-2/
+				child-state-1/
+					child-state-1_controler.js
+					child-state-1_module.js
+					child-state-1_styles.scss
+					child-state-1_template.jade
+					child-state-1_test-e2e.js
+					child-state-1_test-unit.js
+				child-state-2
+					child-state-2_controler.js
+					child-state-2_module.js
+					child-state-2_styles.scss
+					child-state-2_template.jade
+					child-state-2_test-e2e.js
+					child-state-2_test-unit.js
+				parent-state-2_controler.js
+				parent-state-2_module.js
+				parent-state-2_styles.scss
+				parent-state-2_template.jade
+				parent-state-2_test-e2e.js
+				parent-state-2_test-unit.js
+			state-1/
+				state-1_controller.js
+				state-1_module.js
+				state-1_styles.scss
+				state-1_template.jade
+				state-1_test-e2e.js
+				state-1_test-unit.js
+			
 	common-components/
 		directives/
 			dropdown/
@@ -81,7 +103,9 @@ build/
 	
 package.json            // Dependencies
 bower.json
-gulpfile.js
+
+gulpfile.js			   	// Build file
+
 README.md
 
 .csscomb.json           // Linting config

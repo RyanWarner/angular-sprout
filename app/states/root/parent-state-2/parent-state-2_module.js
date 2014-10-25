@@ -13,7 +13,7 @@ parentState2.config( function( $stateProvider )
 {
 	$stateProvider.state( 'root.parent-state-2',
 	{
-		url: 'parent-state-2',
+		url: '/parent-state-2',
 		views:
 		{
 			'content':
