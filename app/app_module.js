@@ -9,8 +9,7 @@ var angularSprout = angular.module( 'angularSprout',
 	'root',
 
 	'state1',
-	'parentState2',
-	'grandparentState3'
+	'parentState2'
 
 ] );
 

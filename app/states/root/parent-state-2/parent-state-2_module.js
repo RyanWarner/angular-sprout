@@ -22,6 +22,7 @@ parentState2.config( function( $stateProvider )
 				controller: 'ParentState2Controller as parentState2'
 			}
 		},
-		activeTopNav: 'parent-state-2'
+		activeTopNav: 'parent-state-2',
+		abstract: true
 	} );
 } );
