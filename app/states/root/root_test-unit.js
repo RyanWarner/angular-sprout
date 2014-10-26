@@ -1,6 +1,6 @@
 'use strict';
 
-describe( 'My Root Controller', function(  )
+describe( 'Root', function(  )
 {
 	var scope;
 	var controller;
@@ -8,17 +8,16 @@ describe( 'My Root Controller', function(  )
 	beforeEach( function(  )
 	{
 		module( 'angularSprout' );
-		module( 'state1' );
 	} );
 
 	beforeEach( inject( function( $rootScope, $controller )
 	{
 		scope = $rootScope.$new(  );
-		controller = $controller( 'State1Controller', { $scope: scope } );
+		controller = $controller( 'RootController', { $scope: scope } );
 	} ) );
 
 	it( 'should have a scope variable', function(  )
 	{
-		expect( scope.stateName ).to.equal( 'state-1' );
+		expect( scope.stateName ).to.equal( 'root' );
 	} );
 } );

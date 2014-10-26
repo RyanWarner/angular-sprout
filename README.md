@@ -35,13 +35,6 @@ I still have many questions to answer and best practices to discover, and when I
 app/
 	states/
 		root/
-			grandparent-state-3/
-				grandparent-state-3_controler.js
-				grandparent-state-3_module.js
-				grandparent-state-3_styles.scss
-				grandparent-state-3_template.jade
-				grandparent-state-3_test-e2e.js
-				grandparent-state-3_test-unit.js
 			parent-state-2/
 				child-state-1/
 					child-state-1_controler.js

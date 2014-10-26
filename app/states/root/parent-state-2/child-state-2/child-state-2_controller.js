@@ -9,6 +9,6 @@ childState2.controller( 'ChildState2Controller', function( $rootScope, $scope )
 
 	$scope.stateName = 'parentState2.child-state-2';
 
-	console.log( 'ChildState1Controller active!' );
+	console.log( 'ChildState2Controller active!' );
 
 } );

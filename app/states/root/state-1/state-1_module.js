@@ -10,7 +10,7 @@ state1.config( function( $stateProvider )
 {
 	$stateProvider.state( 'root.state-1',
 	{
-		url: 'state-1',
+		url: '',
 		views:
 		{
 			'content':

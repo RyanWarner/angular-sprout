@@ -2,7 +2,10 @@
 
 var root = angular.module( 'root',
 [
-	'ui.router'
+	'ui.router',
+
+	'state1',
+	'parentState2'
 ] );
 
 root.config( function( $stateProvider )
@@ -17,6 +20,7 @@ root.config( function( $stateProvider )
 				templateUrl: 'states/root/root_template.html',
 				controller: 'RootController as root'
 			}
-		}
+		},
+		abstract: true
 	} );
 } );

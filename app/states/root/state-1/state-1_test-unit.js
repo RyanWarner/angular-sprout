@@ -1,6 +1,6 @@
 'use strict';
 
-describe( 'My Root Controller', function(  )
+describe( 'State 1', function(  )
 {
 	var scope;
 	var controller;
@@ -8,7 +8,6 @@ describe( 'My Root Controller', function(  )
 	beforeEach( function(  )
 	{
 		module( 'angularSprout' );
-		module( 'state1' );
 	} );
 
 	beforeEach( inject( function( $rootScope, $controller )
