@@ -72,7 +72,8 @@ linters:
 
   PropertySpelling:
     enabled: true
-    extra_properties: []
+    extra_properties:
+      - overflow-scrolling
 
   SelectorDepth:
     enabled: true
