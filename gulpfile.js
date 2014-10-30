@@ -26,25 +26,31 @@ var webdriver_update      = require( 'gulp-protractor' ).webdriver_update;
 
 
 
-var BUILD_DIR = './build';
+var BUILD_DIR         = './build';
 
-var JADE_SRC_FILES = './app/**/*.jade';
-var HTML_OUTPUT = BUILD_DIR;
+var JADE_SRC_FILES    = './app/**/*.jade';
+var HTML_OUTPUT       = BUILD_DIR;
 
-var SASS_SRC_FILES = './app/**/*.scss';
-var CSS_DIR        = BUILD_DIR + '/css'
-var CSS_FILES      = CSS_DIR + '/**/*.css';
+var SASS_SRC_FILES    = './app/**/*.scss';
+var CSS_DIR           = BUILD_DIR + '/css'
+var CSS_FILES         = CSS_DIR + '/**/*.css';
 
-var SCRIPTS_SRC_FILES    = [ './app/**/*.js', './app/*.js', '!./app/**/*_test*.js' ];
-var SCRIPTS_OUTPUT_FILES = BUILD_DIR;
+var SCRIPTS_SRC_FILES =
+[
+    './app/**/*.js',
+    './app/*.js',
+    '!./app/**/*_test*.js'
+];
 
-var BOWER_DIR       = BUILD_DIR + '/bower';
-var BOWER_CSS_FILES = BOWER_DIR + '/**/*.css';
-var BOWER_JS_FILES  = BOWER_DIR + '/**/*.js';
+var BOWER_DIR         = BUILD_DIR + '/bower';
+var BOWER_CSS_FILES   = BOWER_DIR + '/**/*.css';
+var BOWER_JS_FILES    = BOWER_DIR + '/**/*.js';
 
-var LINTERS_DIR = './linters'
+var FAVICON           = 'favicon.png';
 
-var E2E_TESTS = [ './app/**/*_test-e2e.js' ];
+var LINTERS_DIR       = './linters'
+
+var E2E_TESTS         = [ './app/**/*_test-e2e.js' ];
 
 
 var handleError = function( err )
@@ -210,13 +216,20 @@ gulp.task( 'scripts', [ 'eslint', 'bower-files' ], function( )
 
 
 
-// Images.
+// Assets.
 
 gulp.task( 'images', function(  )
 {
     return gulp.src( './images/**/*' )
         .pipe( gulp.dest( BUILD_DIR + '/images/' ) );
 } );
+
+gulp.task( 'favicon', function(  )
+{
+    return gulp.src( FAVICON )
+        .pipe( gulp.dest( BUILD_DIR ) );
+} );
+
 
 
 gulp.task( 'clean', function( callback )
@@ -248,29 +261,6 @@ gulp.task( 'watch', function(  )
 
 
 
-// gulp.task( 'browser-sync', function(  )
-// {
-//     browserSync( {
-
-//         server:
-//         {
-//             baseDir: BUILD_DIR
-//         },
-//         middleware: function (req, res, next)
-//         {
-//             return[ noHash ];
-//         },
-//         ghostMode: {
-//                 links: false
-//             },
-//         port: 8080,
-//         open: false
-
-//     } );
-// } );
-
-
-
 gulp.task( 'default', function(  )
 {
     runSequence(
@@ -279,7 +269,8 @@ gulp.task( 'default', function(  )
             'sass',
             'scripts',
             'jade',
-            'images'
+            'images',
+            'favicon'
         ],
         'inject',
         'connect',
