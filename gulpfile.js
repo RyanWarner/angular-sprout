@@ -32,6 +32,7 @@ var JADE_SRC_FILES    = './app/**/*.jade';
 var HTML_OUTPUT       = BUILD_DIR;
 
 var SASS_SRC_FILES    = './app/**/*.scss';
+var MAIN_SASS_FILE    = BUILD_DIR + '/app_styles.css';
 var CSS_DIR           = BUILD_DIR + '/css'
 var CSS_FILES         = CSS_DIR + '/**/*.css';
 
@@ -126,7 +127,7 @@ gulp.task( 'inject', function( )
 
     return target
         .pipe( inject( gulp.src( [ BOWER_CSS_FILES ], { read: false } ), bowerInjectOptions ) )
-        .pipe( inject( gulp.src( [ './build/app_styles.css' ], { read: false } ), injectOptions ) )
+        .pipe( inject( gulp.src( [ MAIN_SASS_FILE ], { read: false } ), injectOptions ) )
         
         .pipe( inject( gulp.src( [ BOWER_JS_FILES ], { read: false } ), bowerInjectOptions ) )
         .pipe( inject( 
