@@ -54,6 +54,7 @@
     	"space-unary-word-ops": 2,
 
     	"no-undef": 0,
-    	"block-scoped-var": 0
+    	"block-scoped-var": 0,
+        "no-unused-vars": 0         // This is off because I'm not sure how to properly setup tests without triggering this error.
     }
 }

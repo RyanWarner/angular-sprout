@@ -2,11 +2,11 @@
 
 describe( 'Root', function(  )
 {
-	var scope;
-	var controller;
-
 	beforeEach( function(  )
 	{
+		var scope;
+		var controller;
+
 		module( 'angularSprout' );
 	} );
 

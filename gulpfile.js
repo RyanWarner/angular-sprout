@@ -42,6 +42,8 @@ var SCRIPTS_SRC_FILES =
     './app/*.js',
     '!./app/**/*_test*.js'
 ];
+var TEST_FILES = './app/**/*_test*.js';
+var ALL_JAVASCRIPT = './app/**/*.js';
 
 var BOWER_DIR         = BUILD_DIR + '/bower';
 var BOWER_CSS_FILES   = BOWER_DIR + '/**/*.css';
@@ -202,7 +204,7 @@ gulp.task( 'bower-files', function( )
 
 gulp.task( 'eslint', function(  )
 {
-    return gulp.src( SCRIPTS_SRC_FILES )
+    return gulp.src( ALL_JAVASCRIPT )
         .pipe( eslint(  ) )
         .pipe( eslint.format(  ) );
 } );
@@ -258,6 +260,8 @@ gulp.task( 'watch', function(  )
             'inject'
         );
     } );
+
+    gulp.watch( TEST_FILES, [ 'eslint' ] );
 } );
 
 
