@@ -1,6 +1,7 @@
 var gulp            = require( 'gulp' );
 var gutil           = require( 'gulp-util' );
 var connect         = require( 'gulp-connect' );
+var cache           = require( 'gulp-cached' );
 
 var rimraf          = require( 'rimraf' );
 
@@ -53,7 +54,7 @@ var FAVICON           = 'favicon.png';
 
 var LINTERS_DIR       = './linters'
 
-var E2E_TESTS         = [ './app/**/*_test-e2e.js' ];
+var E2E_TESTS         = './app/**/*_test-e2e.js';
 
 
 var handleError = function( err )
@@ -78,6 +79,10 @@ gulp.task( 'connect', function(  )
     } );
 } );
 
+
+
+// Tests
+
 gulp.task( 'unit-tests', function( done )
 {
     karma.start( {
@@ -99,6 +104,9 @@ gulp.task( 'protractor', [ 'update-webdriver' ], function( done )
         } ) )
         .on( 'error', handleError );
 } );
+
+
+
 
 // Jade.
 
