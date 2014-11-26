@@ -113,6 +113,7 @@ gulp.task( 'protractor', [ 'update-webdriver' ], function( done )
 gulp.task( 'jade', function( )
 {
     return gulp.src( JADE_SRC_FILES )
+        .pipe( cache( 'jade' ) )
         .pipe( jade( { pretty: true } ) )
         .on( 'error', handleError )
         .pipe( gulp.dest( HTML_OUTPUT ) );
@@ -164,6 +165,7 @@ gulp.task( 'inject', function( )
 gulp.task( 'csscomb', function (  )
 {
     return gulp.src( SASS_SRC_FILES )
+        .pipe( cache( 'sass' ) )
         .pipe( csscomb(  ) )
         .on( 'error', handleError )
         .pipe( gulp.dest( './app' ) );
@@ -179,6 +181,7 @@ gulp.task( 'scss-lint', [ 'csscomb' ], function(  )
 gulp.task( 'sass', [ 'scss-lint' ], function(  )
 {
     return gulp.src( './app/app_styles.scss' )
+        .pipe( cache( 'sass' ) )
         .pipe( sass(  ) )
         .on( 'error', handleError )
         .pipe( prefix( 'last 2 versions', { cascade: true } ) )

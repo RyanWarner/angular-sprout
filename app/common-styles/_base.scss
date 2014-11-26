@@ -29,13 +29,13 @@ h1
 
 p
 {
+	flex-flow: row;
+	flex-wrap: wrap;
+
 	margin-bottom: 24px;
 
 	font-size: 16px;
 	line-height: 28px;
-
-	flex-flow: row;
-	flex-wrap: wrap;
 
 	&:last-child
 	{
