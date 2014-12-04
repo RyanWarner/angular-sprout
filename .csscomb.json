@@ -1,5 +1,10 @@
-
 {
+	"exclude":
+	[
+        ".git/**",
+        "node_modules/**",
+        "bower_components/**"
+    ],
 	"remove-empty-rulesets": true,
     "always-semicolon": true,
     "color-case": "lower",
@@ -20,7 +25,7 @@
     "space-before-selector-delimiter": "",
     "space-before-closing-brace": "\n",
     "strip-spaces": true,
-    "vendor-prefix-align": true,
+    "vendor-prefix-align": false,
 	"sort-order": 
 	[
 		[
@@ -29,7 +34,7 @@
 		[
 			"flex-flow",
 			"flex-direction",
-			"flex-wrap"
+			"flex-wrap",
 
 			"align-items",
 			"align-self",
@@ -45,7 +50,7 @@
 			"flex-basis",
 
 			"flex-pack",
-			"flex-align",
+			"flex-align"
 		],
 		[
 			"content",
@@ -153,7 +158,6 @@
 			"background-repeat",
 			"box-decoration-break",
 			"box-shadow"
-
 		],
 		[
 			"color",
