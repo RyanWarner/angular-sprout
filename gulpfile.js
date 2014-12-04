@@ -165,7 +165,7 @@ gulp.task( 'inject', function( )
 gulp.task( 'csscomb', function (  )
 {
 	return gulp.src( SASS_SRC_FILES )
-		.pipe( cache( 'sass' ) )
+		.pipe( cache( 'csscomb' ) )
 		.pipe( csscomb(  ) )
 		.on( 'error', handleError )
 		.pipe( gulp.dest( './app' ) );
