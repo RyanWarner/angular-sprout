@@ -20,6 +20,9 @@ var scsslint        = require( 'gulp-scss-lint' );
 var csscomb         = require( 'gulp-csscomb' );
 var eslint          = require( 'gulp-eslint' );
 
+var ngAnnotate      = require( 'gulp-ng-annotate' );
+var uglify          = require( 'gulp-uglify' );
+
 var karma                 = require( 'karma' ).server;
 var protractor            = require( 'gulp-protractor' ).protractor;
 var webdriver_standalone  = require( 'gulp-protractor' ).webdriver_standalone;
@@ -28,6 +31,7 @@ var webdriver_update      = require( 'gulp-protractor' ).webdriver_update;
 
 
 var BUILD_DIR         = './build';
+var DEPLOY_DIR        = './deploy';
 
 var JADE_SRC_FILES    = './app/**/*.jade';
 var HTML_OUTPUT       = BUILD_DIR;
@@ -43,6 +47,7 @@ var SCRIPTS_SRC_FILES =
 	'./app/*.js',
 	'!./app/**/*_test*.js'
 ];
+
 var TEST_FILES = './app/**/*_test*.js';
 var ALL_JAVASCRIPT = './app/**/*.js';
 
@@ -275,6 +280,35 @@ gulp.task( 'watch', function(  )
 
 	gulp.watch( TEST_FILES, [ 'eslint' ] );
 } );
+
+
+
+// Deploy process.
+
+gulp.task( 'ng-annotate', function( )
+{
+	return gulp.src( BUILD_DIR + '/**/*.js' )
+		.pipe( ngAnnotate(
+		{
+		    remove: true,
+		    add: true,
+		    single_quotes: true
+		} ) )
+		.pipe( gulp.dest( DEPLOY_DIR ) );
+} );
+
+gulp.task( 'uglify', function( )
+{
+	return gulp.src( DEPLOY_DIR + '/**/*.js' )
+		.pipe( uglify(  ) )
+		.pipe( gulp.dest( DEPLOY_DIR ) );
+} );
+
+gulp.task( 'deploy', function(  )
+{
+
+} );
+
 
 
 
