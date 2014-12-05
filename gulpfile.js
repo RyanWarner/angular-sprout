@@ -2,6 +2,7 @@ var gulp            = require( 'gulp' );
 var gutil           = require( 'gulp-util' );
 var connect         = require( 'gulp-connect' );
 var cache           = require( 'gulp-cached' );
+var concat          = require( 'gulp-concat' );
 
 var rimraf          = require( 'rimraf' );
 
@@ -285,7 +286,7 @@ gulp.task( 'watch', function(  )
 
 // Deploy process.
 
-gulp.task( 'ng-annotate', function( )
+gulp.task( 'deploy-js', function( )
 {
 	return gulp.src( BUILD_DIR + '/**/*.js' )
 		.pipe( ngAnnotate(
@@ -294,12 +295,7 @@ gulp.task( 'ng-annotate', function( )
 		    add: true,
 		    single_quotes: true
 		} ) )
-		.pipe( gulp.dest( DEPLOY_DIR ) );
-} );
-
-gulp.task( 'uglify', function( )
-{
-	return gulp.src( DEPLOY_DIR + '/**/*.js' )
+		.pipe( concat( 'angular-sprout.js' ) )
 		.pipe( uglify(  ) )
 		.pipe( gulp.dest( DEPLOY_DIR ) );
 } );
