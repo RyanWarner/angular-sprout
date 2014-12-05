@@ -2,7 +2,7 @@ var gulp            = require( 'gulp' );
 var gutil           = require( 'gulp-util' );
 var connect         = require( 'gulp-connect' );
 var cache           = require( 'gulp-cached' );
-var concat          = require( 'gulp-concat' );
+
 
 var rimraf          = require( 'rimraf' );
 
@@ -23,6 +23,8 @@ var eslint          = require( 'gulp-eslint' );
 
 var ngAnnotate      = require( 'gulp-ng-annotate' );
 var uglify          = require( 'gulp-uglify' );
+var order           = require( 'gulp-order' );
+var concat          = require( 'gulp-concat' );
 
 var karma                 = require( 'karma' ).server;
 var protractor            = require( 'gulp-protractor' ).protractor;
@@ -286,18 +288,56 @@ gulp.task( 'watch', function(  )
 
 // Deploy process.
 
-gulp.task( 'deploy-js', function( )
+gulp.task( 'deploy-bower-js', function( )
 {
-	return gulp.src( BUILD_DIR + '/**/*.js' )
+	return gulp.src( BUILD_DIR + '/bower/**/*.js' )
+		// .pipe( order(
+		// [
+		// 	'angular/angular.js',
+		// 	'*'
+		// ] ) )
+		//.pipe( concat( 'bower.js' ) )
+		//.pipe( uglify(  ) )
+		.pipe( gulp.dest( DEPLOY_DIR ) );
+} );
+
+gulp.task( 'deploy-js', [ 'deploy-bower-js' ], function( )
+{
+	return gulp.src( SCRIPTS_SRC_FILES )
 		.pipe( ngAnnotate(
 		{
 		    remove: true,
 		    add: true,
 		    single_quotes: true
 		} ) )
+		.pipe( angularFilesort(  ) )
 		.pipe( concat( 'angular-sprout.js' ) )
-		.pipe( uglify(  ) )
+		//.pipe( uglify(  ) )
 		.pipe( gulp.dest( DEPLOY_DIR ) );
+} );
+
+gulp.task( 'deploy-jade', function( )
+{
+	return gulp.src( JADE_SRC_FILES )
+		.pipe( cache( 'jade' ) )
+		.pipe( jade( { pretty: true } ) )
+		.on( 'error', handleError )
+		.pipe( gulp.dest( DEPLOY_DIR ) );
+} );
+
+gulp.task( 'deploy-connect', [ 'deploy-js' ], function(  )
+{
+	connect.server(
+	{
+		root: DEPLOY_DIR,
+		hostname: '0.0.0.0',
+		livereload: true,
+		middleware: function( connect, opt )
+		{
+			// This get's rid of the # symbol in the URL
+			return[ noHash ];
+		}
+	} );
 } );
 
 gulp.task( 'deploy', function(  )
