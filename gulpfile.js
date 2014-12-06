@@ -27,6 +27,7 @@ var order           = require( 'gulp-order' );
 var concat          = require( 'gulp-concat' );
 var merge           = require( 'merge-stream' );
 var streamqueue     = require( 'streamqueue' );
+var minifyHTML     = require( 'gulp-minify-html' );
 
 var karma                 = require( 'karma' ).server;
 var protractor            = require( 'gulp-protractor' ).protractor;
@@ -353,16 +354,22 @@ gulp.task( 'deploy-inject', function( )
 		.pipe( gulp.dest( BUILD_DIR ) );
 } );
 
+gulp.task( 'minify-html', function(  )
+{
+	return gulp.src( BUILD_DIR + '/**/*.html' )
+	    .pipe( minifyHTML(  ) )
+	    .pipe( gulp.dest( BUILD_DIR ) )
+} );
+
 
 gulp.task( 'deploy', function(  )
 {
-	console.log( process.env );
-
 	runSequence(
 		'clean',
 		'deploy-scripts',
 		'jade',
 		'deploy-inject',
+		'minify-html',
 		'connect'
 	);
 } );

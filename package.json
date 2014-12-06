@@ -55,6 +55,7 @@
     "gulp-concat": "~2.4.2",
     "gulp-order": "~1.1.1",
     "del": "~1.1.0",
-    "streamqueue": "~0.1.1"
+    "streamqueue": "~0.1.1",
+    "gulp-minify-html": "~0.1.7"
   }
 }
