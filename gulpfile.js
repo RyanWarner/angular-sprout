@@ -39,7 +39,6 @@ var BUILD_DIR         = './build';
 var DEPLOY_DIR        = './deploy';
 
 var JADE_SRC_FILES    = './app/**/*.jade';
-var HTML_OUTPUT       = BUILD_DIR;
 
 var SASS_SRC_FILES    = './app/**/*.scss';
 var MAIN_CSS_FILE     = BUILD_DIR + '/app_styles.css';
@@ -130,7 +129,7 @@ gulp.task( 'jade', function( )
 		.pipe( cache( 'jade' ) )
 		.pipe( jade( { pretty: true } ) )
 		.on( 'error', handleError )
-		.pipe( gulp.dest( HTML_OUTPUT ) );
+		.pipe( gulp.dest( BUILD_DIR ) );
 } );
 
 gulp.task( 'inject', function( )
@@ -338,20 +337,13 @@ gulp.task( 'deploy-scripts', [ 'eslint' ], function(  )
 } );
 
 
-
-gulp.task( 'deploy-jade', function( )
-{
-	return gulp.src( JADE_SRC_FILES )
-		.pipe( cache( 'jade' ) )
-		.pipe( jade( { pretty: true } ) )
-		.on( 'error', handleError )
-		.pipe( gulp.dest( DEPLOY_DIR ) );
-} );
-
 gulp.task( 'deploy', function(  )
 {
+	console.log( process.env );
+
 	runSequence(
 		'clean',
+		'jade',
 		'deploy-scripts',
 		'connect'
 	);
