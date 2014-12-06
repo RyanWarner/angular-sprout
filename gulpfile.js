@@ -337,14 +337,32 @@ gulp.task( 'deploy-scripts', [ 'eslint' ], function(  )
 } );
 
 
+gulp.task( 'deploy-inject', function( )
+{
+	var injectOptions = 
+	{
+	  relative: true,
+	  addRootSlash: false,
+	  name: 'min'
+	};
+
+	var target = gulp.src( BUILD_DIR + '/index.html' );
+
+	return target
+		.pipe( inject( gulp.src( BUILD_DIR + '/angular-sprout.js', { read: false } ), injectOptions ) )
+		.pipe( gulp.dest( BUILD_DIR ) );
+} );
+
+
 gulp.task( 'deploy', function(  )
 {
 	console.log( process.env );
 
 	runSequence(
 		'clean',
-		'jade',
 		'deploy-scripts',
+		'jade',
+		'deploy-inject',
 		'connect'
 	);
 } );
