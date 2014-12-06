@@ -32,7 +32,6 @@
     "main-bower-files": "~2.4.1",
     "run-sequence": "~1.0.2",
     "connect-history-api-fallback": "0.0.5",
-    "rimraf": "~2.2.8",
     "gulp-connect": "~2.2.0",
     "karma": "~0.12.28",
     "mocha": "~2.0.1",
@@ -56,8 +55,6 @@
     "gulp-concat": "~2.4.2",
     "gulp-order": "~1.1.1",
     "del": "~1.1.0",
-    "vinyl-paths": "~1.0.0",
-    "merge-stream": "~0.1.6",
     "streamqueue": "~0.1.1"
   }
 }

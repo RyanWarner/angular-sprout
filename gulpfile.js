@@ -4,7 +4,6 @@ var connect         = require( 'gulp-connect' );
 var cache           = require( 'gulp-cached' );
 
 
-var rimraf          = require( 'rimraf' );
 var del             = require( 'del' );
 
 var runSequence     = require( 'run-sequence' );
@@ -56,6 +55,10 @@ var SCRIPTS_SRC_FILES =
 
 var TEST_FILES = './app/**/*_test*.js';
 var ALL_JAVASCRIPT = './app/**/*.js';
+
+var BOWER_SRC         = './bower_components';
+var BOWER_MANIFEST    = './bower.json';
+var BOWER_CONFIG      = './.bowerrc';
 
 var BOWER_DIR         = BUILD_DIR + '/bower';
 var BOWER_CSS_FILES   = BOWER_DIR + '/**/*.css';
@@ -213,13 +216,13 @@ gulp.task( 'bower-files', function( )
 		{
 			paths:
 			{
-				bowerDirectory: './bower_components',
-				bowerrc: './.bowerrc',
-				bowerJson: './bower.json'
+				bowerDirectory: BOWER_SRC,
+				bowerrc: BOWER_CONFIG,
+				bowerJson: BOWER_MANIFEST
 			} 
 		} ),
 		{
-			base: './bower_components'
+			base: BOWER_SRC
 		} )
 		.pipe( gulp.dest( BOWER_DIR ) );
 } );
@@ -258,9 +261,9 @@ gulp.task( 'favicon', function(  )
 
 
 
-gulp.task( 'clean', function( callback )
+gulp.task( 'clean', function(  )
 {
-	rimraf( './' + BUILD_DIR, callback );
+	del( BUILD_DIR + '/*' );
 } );
 
 gulp.task( 'watch', function(  )
@@ -291,21 +294,31 @@ gulp.task( 'watch', function(  )
 
 // Deploy process.
 
-gulp.task( 'deploy-clean', function(  )
-{
-	del( DEPLOY_DIR + '/angular-sprout.js' );
-} );
-
-
-gulp.task( 'deploy-test', function( )
+gulp.task( 'deploy-scripts', [ 'eslint' ], function(  )
 {
 	return streamqueue( { objectMode: true },
-        gulp.src( BUILD_DIR + '/bower/**/*.js' )
+
+		// Order bower components.
+
+        gulp.src( mainBowerFiles(
+		{
+			paths:
+			{
+				bowerDirectory: BOWER_SRC,
+				bowerrc: BOWER_CONFIG,
+				bowerJson: BOWER_MANIFEST
+			}
+		} ),
+		{
+			base: BOWER_SRC
+		} )
 		.pipe( order(
 		[
 			'angular/angular.js',
 			'*'
 		] ) ),
+
+		// Order source scripts.
 
         gulp.src( SCRIPTS_SRC_FILES )
 		.pipe( ngAnnotate(
@@ -316,9 +329,12 @@ gulp.task( 'deploy-test', function( )
 		} ) )
 		.pipe( angularFilesort(  ) )
     )
+
+    	// Then concatenate and uglify them.
+
         .pipe( concat( 'angular-sprout.js' ) )
         .pipe( uglify(  ) )
-        .pipe( gulp.dest( DEPLOY_DIR ) );
+        .pipe( gulp.dest( BUILD_DIR ) );
 } );
 
 
@@ -332,27 +348,12 @@ gulp.task( 'deploy-jade', function( )
 		.pipe( gulp.dest( DEPLOY_DIR ) );
 } );
 
-gulp.task( 'deploy-connect', function(  )
-{
-	connect.server(
-	{
-		root: DEPLOY_DIR,
-		hostname: '0.0.0.0',
-		livereload: true,
-		middleware: function( connect, opt )
-		{
-			// This get's rid of the # symbol in the URL
-			return[ noHash ];
-		}
-	} );
-} );
-
 gulp.task( 'deploy', function(  )
 {
 	runSequence(
-		'deploy-clean',
-		'deploy-test',
-		'deploy-connect'
+		'clean',
+		'deploy-scripts',
+		'connect'
 	);
 } );
 
