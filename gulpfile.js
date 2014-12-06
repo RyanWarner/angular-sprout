@@ -5,6 +5,7 @@ var cache           = require( 'gulp-cached' );
 
 
 var rimraf          = require( 'rimraf' );
+var del             = require( 'del' );
 
 var runSequence     = require( 'run-sequence' );
 var noHash          = require( 'connect-history-api-fallback' );
@@ -25,6 +26,8 @@ var ngAnnotate      = require( 'gulp-ng-annotate' );
 var uglify          = require( 'gulp-uglify' );
 var order           = require( 'gulp-order' );
 var concat          = require( 'gulp-concat' );
+var merge           = require( 'merge-stream' );
+var streamqueue     = require( 'streamqueue' );
 
 var karma                 = require( 'karma' ).server;
 var protractor            = require( 'gulp-protractor' ).protractor;
@@ -288,20 +291,59 @@ gulp.task( 'watch', function(  )
 
 // Deploy process.
 
+gulp.task( 'deploy-clean', function(  )
+{
+	del( DEPLOY_DIR + '/angular-sprout.js' );
+} );
+
+
+gulp.task( 'deploy-test', function( )
+{
+
+	return streamqueue( { objectMode: true },
+        gulp.src( BUILD_DIR + '/bower/**/*.js' )
+		.pipe( order(
+		[
+			'angular/angular.js',
+			'*'
+		] ) ),
+		//.pipe( concat(  ) )
+		//.pipe( uglify(  ) ),
+
+        gulp.src( SCRIPTS_SRC_FILES )
+		.pipe( ngAnnotate(
+		{
+		    remove: true,
+		    add: true,
+		    single_quotes: true
+		} ) )
+		.pipe( angularFilesort(  ) )
+		//.pipe( concat(  ) )
+		//.pipe( uglify(  ) )
+    )
+        .pipe( concat( 'angular-sprout.js' ) )
+        .pipe( uglify(  ) )
+        .pipe( gulp.dest( DEPLOY_DIR ) );
+} );
+
+
+
+
+
 gulp.task( 'deploy-bower-js', function( )
 {
 	return gulp.src( BUILD_DIR + '/bower/**/*.js' )
-		// .pipe( order(
-		// [
-		// 	'angular/angular.js',
-		// 	'*'
-		// ] ) )
-		//.pipe( concat( 'bower.js' ) )
-		//.pipe( uglify(  ) )
+		.pipe( order(
+		[
+			'angular/angular.js',
+			'*'
+		] ) )
+		.pipe( concat( 'bower.js' ) )
+		.pipe( uglify(  ) )
 		.pipe( gulp.dest( DEPLOY_DIR ) );
 } );
 
-gulp.task( 'deploy-js', [ 'deploy-bower-js' ], function( )
+gulp.task( 'deploy-app-js', function( )
 {
 	return gulp.src( SCRIPTS_SRC_FILES )
 		.pipe( ngAnnotate(
@@ -312,8 +354,26 @@ gulp.task( 'deploy-js', [ 'deploy-bower-js' ], function( )
 		} ) )
 		.pipe( angularFilesort(  ) )
 		.pipe( concat( 'angular-sprout.js' ) )
-		//.pipe( uglify(  ) )
+		.pipe( uglify(  ) )
 		.pipe( gulp.dest( DEPLOY_DIR ) );
+} );
+
+gulp.task( 'concat-bower-and-app-js', function( )
+{
+	return gulp.src( DEPLOY_DIR + '**/*.js' )
+		.pipe( order(
+		[
+			'bower.js',
+			'angular-sprout.js'
+		],{ base: DEPLOY_DIR } ) )
+		.on( 'error', handleError )
+		.pipe( concat( 'angular-sprout.js' ) )
+		.pipe( gulp.dest( DEPLOY_DIR ) );
+} );
+
+gulp.task( 'del:bower', function(  )
+{
+	del( DEPLOY_DIR + '/bower.js' );
 } );
 
 gulp.task( 'deploy-jade', function( )
@@ -325,7 +385,7 @@ gulp.task( 'deploy-jade', function( )
 		.pipe( gulp.dest( DEPLOY_DIR ) );
 } );
 
-gulp.task( 'deploy-connect', [ 'deploy-js' ], function(  )
+gulp.task( 'deploy-connect', function(  )
 {
 	connect.server(
 	{
@@ -342,7 +402,11 @@ gulp.task( 'deploy-connect', [ 'deploy-js' ], function(  )
 
 gulp.task( 'deploy', function(  )
 {
-
+	runSequence(
+		'deploy-clean',
+		'deploy-test',
+		'deploy-connect'
+	);
 } );
 
 
@@ -362,5 +426,5 @@ gulp.task( 'default', function(  )
 		'inject',
 		'connect',
 		'watch'
-	);   
+	);
 } );
