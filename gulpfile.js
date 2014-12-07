@@ -386,6 +386,7 @@ gulp.task( 'deploy', function(  )
 	runSequence(
 		'clean',
 		[
+			'images',
 			'deploy-scripts',
 			'deploy-css'
 		],
