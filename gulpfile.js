@@ -27,7 +27,8 @@ var order           = require( 'gulp-order' );
 var concat          = require( 'gulp-concat' );
 var merge           = require( 'merge-stream' );
 var streamqueue     = require( 'streamqueue' );
-var minifyHTML     = require( 'gulp-minify-html' );
+var minifyHTML      = require( 'gulp-minify-html' );
+var minifyCSS       = require( 'gulp-minify-css' );
 
 var karma                 = require( 'karma' ).server;
 var protractor            = require( 'gulp-protractor' ).protractor;
@@ -330,11 +331,11 @@ gulp.task( 'deploy-scripts', [ 'eslint' ], function(  )
 		.pipe( angularFilesort(  ) )
     )
 
-    	// Then concatenate and uglify them.
+	// Then concatenate and uglify them.
 
-        .pipe( concat( 'angular-sprout.js' ) )
-        .pipe( uglify(  ) )
-        .pipe( gulp.dest( BUILD_DIR ) );
+    .pipe( concat( 'angular-sprout.js' ) )
+    .pipe( uglify(  ) )
+    .pipe( gulp.dest( BUILD_DIR ) );
 } );
 
 
@@ -351,6 +352,7 @@ gulp.task( 'deploy-inject', function( )
 
 	return target
 		.pipe( inject( gulp.src( BUILD_DIR + '/angular-sprout.js', { read: false } ), injectOptions ) )
+		.pipe( inject( gulp.src( BUILD_DIR + '/angular-sprout.css', { read: false } ), injectOptions ) )
 		.pipe( gulp.dest( BUILD_DIR ) );
 } );
 
@@ -361,12 +363,32 @@ gulp.task( 'minify-html', function(  )
 	    .pipe( gulp.dest( BUILD_DIR ) )
 } );
 
+gulp.task( 'deploy-css', function(  )
+{
+	return streamqueue( { objectMode: true },
+		gulp.src( BOWER_CSS_FILES ),
+
+		gulp.src( './app/app_styles.scss' )
+		.pipe( sass(  ) )
+		.on( 'error', handleError )
+		.pipe( prefix( 'last 2 versions', { cascade: true } ) )
+		.on( 'error', handleError )
+	)
+	.pipe( concat( 'angular-sprout.css' ) )
+    .pipe( minifyCSS(  ) )
+    .pipe( gulp.dest ( BUILD_DIR ) );
+
+} );
+
 
 gulp.task( 'deploy', function(  )
 {
 	runSequence(
 		'clean',
-		'deploy-scripts',
+		[
+			'deploy-scripts',
+			'deploy-css'
+		],
 		'jade',
 		'deploy-inject',
 		'minify-html',
