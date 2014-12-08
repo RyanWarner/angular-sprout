@@ -29,6 +29,8 @@ var merge           = require( 'merge-stream' );
 var streamqueue     = require( 'streamqueue' );
 var minifyHTML      = require( 'gulp-minify-html' );
 var minifyCSS       = require( 'gulp-minify-css' );
+var imagemin        = require( 'gulp-imagemin' );
+var pngquant        = require( 'imagemin-pngquant' );
 
 var karma                 = require( 'karma' ).server;
 var protractor            = require( 'gulp-protractor' ).protractor;
@@ -37,12 +39,11 @@ var webdriver_update      = require( 'gulp-protractor' ).webdriver_update;
 
 
 
-var BUILD_DIR         = './build';
-var DEPLOY_DIR        = './deploy';
+var BUILD_DIR         = __dirname + '/build';
 
-var JADE_SRC_FILES    = './app/**/*.jade';
+var JADE_SRC_FILES    = __dirname + '/app/**/*.jade';
 
-var SASS_SRC_FILES    = './app/**/*.scss';
+var SASS_SRC_FILES    = __dirname + '/app/**/*.scss';
 var MAIN_CSS_FILE     = BUILD_DIR + '/app_styles.css';
 var CSS_DIR           = BUILD_DIR + '/css'
 var CSS_FILES         = CSS_DIR + '/**/*.css';
@@ -54,8 +55,8 @@ var SCRIPTS_SRC_FILES =
 	'!./app/**/*_test*.js'
 ];
 
-var TEST_FILES = './app/**/*_test*.js';
-var ALL_JAVASCRIPT = './app/**/*.js';
+var TEST_FILES        = './app/**/*_test*.js';
+var ALL_JAVASCRIPT    = './app/**/*.js';
 
 var BOWER_SRC         = './bower_components';
 var BOWER_MANIFEST    = './bower.json';
@@ -65,7 +66,9 @@ var BOWER_DIR         = BUILD_DIR + '/bower';
 var BOWER_CSS_FILES   = BOWER_DIR + '/**/*.css';
 var BOWER_JS_FILES    = BOWER_DIR + '/**/*.js';
 
-var FAVICON           = 'favicon.png';
+var IMAGES_SRC        = __dirname + '/images/**/*';
+var IMAGES            = BUILD_DIR + '/images/';
+var FAVICON           = __dirname + '/favicon.png';
 
 var LINTERS_DIR       = './linters'
 
@@ -248,10 +251,10 @@ gulp.task( 'scripts', [ 'eslint', 'bower-files' ], function( )
 
 // Assets.
 
-gulp.task( 'images', function(  )
+gulp.task( 'images', [ 'favicon' ], function(  )
 {
-	return gulp.src( './images/**/*' )
-		.pipe( gulp.dest( BUILD_DIR + '/images/' ) );
+	return gulp.src( IMAGES_SRC )
+		.pipe( gulp.dest( IMAGES ) );
 } );
 
 gulp.task( 'favicon', function(  )
@@ -380,13 +383,25 @@ gulp.task( 'deploy-css', function(  )
 
 } );
 
+gulp.task( 'deploy-images', [ 'favicon' ], function (  )
+{
+    return gulp.src( IMAGES_SRC )
+        .pipe( imagemin(
+        {
+            progressive: true,
+            svgoPlugins: [ { removeViewBox: false } ],
+            use: [ pngquant(  ) ]
+        } ) )
+        .pipe( gulp.dest( IMAGES ) );
+} );
+
 
 gulp.task( 'deploy', function(  )
 {
 	runSequence(
 		'clean',
 		[
-			'images',
+			'deploy-images',
 			'deploy-scripts',
 			'deploy-css'
 		],
@@ -408,8 +423,7 @@ gulp.task( 'default', function(  )
 			'sass',
 			'scripts',
 			'jade',
-			'images',
-			'favicon'
+			'images'
 		],
 		'inject',
 		'connect',
