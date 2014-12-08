@@ -152,7 +152,7 @@ End to end tests interact with your interface the same way a user would, in a br
 
 `gulp build`
 
-Deploying does a number of things:
+Building does a number of things:
 
 1. Cleans the build directory by removing all files using [del](https://www.npmjs.org/package/del).
 2. Minifies all images using [gulp-imagemin](https://www.npmjs.org/package/gulp-imagemin).
