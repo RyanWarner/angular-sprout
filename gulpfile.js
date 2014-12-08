@@ -25,7 +25,6 @@ var ngAnnotate      = require( 'gulp-ng-annotate' );
 var uglify          = require( 'gulp-uglify' );
 var order           = require( 'gulp-order' );
 var concat          = require( 'gulp-concat' );
-var merge           = require( 'merge-stream' );
 var streamqueue     = require( 'streamqueue' );
 var minifyHTML      = require( 'gulp-minify-html' );
 var minifyCSS       = require( 'gulp-minify-css' );
