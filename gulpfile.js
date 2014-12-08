@@ -3,7 +3,8 @@ var gutil           = require( 'gulp-util' );
 var connect         = require( 'gulp-connect' );
 var cache           = require( 'gulp-cached' );
 
-var rimraf          = require( 'rimraf' );
+
+var del             = require( 'del' );
 
 var runSequence     = require( 'run-sequence' );
 var noHash          = require( 'connect-history-api-fallback' );
@@ -20,6 +21,17 @@ var scsslint        = require( 'gulp-scss-lint' );
 var csscomb         = require( 'gulp-csscomb' );
 var eslint          = require( 'gulp-eslint' );
 
+var ngAnnotate      = require( 'gulp-ng-annotate' );
+var uglify          = require( 'gulp-uglify' );
+var order           = require( 'gulp-order' );
+var concat          = require( 'gulp-concat' );
+var merge           = require( 'merge-stream' );
+var streamqueue     = require( 'streamqueue' );
+var minifyHTML      = require( 'gulp-minify-html' );
+var minifyCSS       = require( 'gulp-minify-css' );
+var imagemin        = require( 'gulp-imagemin' );
+var pngquant        = require( 'imagemin-pngquant' );
+
 var karma                 = require( 'karma' ).server;
 var protractor            = require( 'gulp-protractor' ).protractor;
 var webdriver_standalone  = require( 'gulp-protractor' ).webdriver_standalone;
@@ -27,12 +39,11 @@ var webdriver_update      = require( 'gulp-protractor' ).webdriver_update;
 
 
 
-var BUILD_DIR         = './build';
+var BUILD_DIR         = __dirname + '/build';
 
-var JADE_SRC_FILES    = './app/**/*.jade';
-var HTML_OUTPUT       = BUILD_DIR;
+var JADE_SRC_FILES    = __dirname + '/app/**/*.jade';
 
-var SASS_SRC_FILES    = './app/**/*.scss';
+var SASS_SRC_FILES    = __dirname + '/app/**/*.scss';
 var MAIN_CSS_FILE     = BUILD_DIR + '/app_styles.css';
 var CSS_DIR           = BUILD_DIR + '/css'
 var CSS_FILES         = CSS_DIR + '/**/*.css';
@@ -43,14 +54,21 @@ var SCRIPTS_SRC_FILES =
 	'./app/*.js',
 	'!./app/**/*_test*.js'
 ];
-var TEST_FILES = './app/**/*_test*.js';
-var ALL_JAVASCRIPT = './app/**/*.js';
+
+var TEST_FILES        = './app/**/*_test*.js';
+var ALL_JAVASCRIPT    = './app/**/*.js';
+
+var BOWER_SRC         = './bower_components';
+var BOWER_MANIFEST    = './bower.json';
+var BOWER_CONFIG      = './.bowerrc';
 
 var BOWER_DIR         = BUILD_DIR + '/bower';
 var BOWER_CSS_FILES   = BOWER_DIR + '/**/*.css';
 var BOWER_JS_FILES    = BOWER_DIR + '/**/*.js';
 
-var FAVICON           = 'favicon.png';
+var IMAGES_SRC        = __dirname + '/images/**/*';
+var IMAGES            = BUILD_DIR + '/images/';
+var FAVICON           = __dirname + '/favicon.png';
 
 var LINTERS_DIR       = './linters'
 
@@ -116,7 +134,7 @@ gulp.task( 'jade', function( )
 		.pipe( cache( 'jade' ) )
 		.pipe( jade( { pretty: true } ) )
 		.on( 'error', handleError )
-		.pipe( gulp.dest( HTML_OUTPUT ) );
+		.pipe( gulp.dest( BUILD_DIR ) );
 } );
 
 gulp.task( 'inject', function( )
@@ -202,13 +220,13 @@ gulp.task( 'bower-files', function( )
 		{
 			paths:
 			{
-				bowerDirectory: './bower_components',
-				bowerrc: './.bowerrc',
-				bowerJson: './bower.json'
+				bowerDirectory: BOWER_SRC,
+				bowerrc: BOWER_CONFIG,
+				bowerJson: BOWER_MANIFEST
 			} 
 		} ),
 		{
-			base: './bower_components'
+			base: BOWER_SRC
 		} )
 		.pipe( gulp.dest( BOWER_DIR ) );
 } );
@@ -233,10 +251,10 @@ gulp.task( 'scripts', [ 'eslint', 'bower-files' ], function( )
 
 // Assets.
 
-gulp.task( 'images', function(  )
+gulp.task( 'images', [ 'favicon' ], function(  )
 {
-	return gulp.src( './images/**/*' )
-		.pipe( gulp.dest( BUILD_DIR + '/images/' ) );
+	return gulp.src( IMAGES_SRC )
+		.pipe( gulp.dest( IMAGES ) );
 } );
 
 gulp.task( 'favicon', function(  )
@@ -247,9 +265,9 @@ gulp.task( 'favicon', function(  )
 
 
 
-gulp.task( 'clean', function( callback )
+gulp.task( 'clean', function(  )
 {
-	rimraf( './' + BUILD_DIR, callback );
+	del( BUILD_DIR + '/*' );
 } );
 
 gulp.task( 'watch', function(  )
@@ -278,6 +296,125 @@ gulp.task( 'watch', function(  )
 
 
 
+// Deploy process.
+
+gulp.task( 'deploy-scripts', [ 'eslint' ], function(  )
+{
+	return streamqueue( { objectMode: true },
+
+		// Order bower components.
+
+        gulp.src( mainBowerFiles(
+		{
+			paths:
+			{
+				bowerDirectory: BOWER_SRC,
+				bowerrc: BOWER_CONFIG,
+				bowerJson: BOWER_MANIFEST
+			}
+		} ),
+		{
+			base: BOWER_SRC
+		} )
+		.pipe( order(
+		[
+			'angular/angular.js',
+			'*'
+		] ) ),
+
+		// Order source scripts.
+
+        gulp.src( SCRIPTS_SRC_FILES )
+		.pipe( ngAnnotate(
+		{
+		    remove: true,
+		    add: true,
+		    single_quotes: true
+		} ) )
+		.pipe( angularFilesort(  ) )
+    )
+
+	// Then concatenate and uglify them.
+
+    .pipe( concat( 'angular-sprout.js' ) )
+    .pipe( uglify(  ) )
+    .pipe( gulp.dest( BUILD_DIR ) );
+} );
+
+
+gulp.task( 'deploy-inject', function( )
+{
+	var injectOptions = 
+	{
+	  relative: true,
+	  addRootSlash: false,
+	  name: 'min'
+	};
+
+	var target = gulp.src( BUILD_DIR + '/index.html' );
+
+	return target
+		.pipe( inject( gulp.src( BUILD_DIR + '/angular-sprout.js', { read: false } ), injectOptions ) )
+		.pipe( inject( gulp.src( BUILD_DIR + '/angular-sprout.css', { read: false } ), injectOptions ) )
+		.pipe( gulp.dest( BUILD_DIR ) );
+} );
+
+gulp.task( 'minify-html', function(  )
+{
+	return gulp.src( BUILD_DIR + '/**/*.html' )
+	    .pipe( minifyHTML(  ) )
+	    .pipe( gulp.dest( BUILD_DIR ) )
+} );
+
+gulp.task( 'deploy-css', function(  )
+{
+	return streamqueue( { objectMode: true },
+		gulp.src( BOWER_CSS_FILES ),
+
+		gulp.src( './app/app_styles.scss' )
+		.pipe( sass(  ) )
+		.on( 'error', handleError )
+		.pipe( prefix( 'last 2 versions', { cascade: true } ) )
+		.on( 'error', handleError )
+	)
+	.pipe( concat( 'angular-sprout.css' ) )
+    .pipe( minifyCSS(  ) )
+    .pipe( gulp.dest ( BUILD_DIR ) );
+
+} );
+
+gulp.task( 'deploy-images', [ 'favicon' ], function (  )
+{
+    return gulp.src( IMAGES_SRC )
+        .pipe( imagemin(
+        {
+            progressive: true,
+            svgoPlugins: [ { removeViewBox: false } ],
+            use: [ pngquant(  ) ]
+        } ) )
+        .pipe( gulp.dest( IMAGES ) );
+} );
+
+
+gulp.task( 'deploy', function(  )
+{
+	runSequence(
+		'clean',
+		[
+			'deploy-images',
+			'deploy-scripts',
+			'deploy-css'
+		],
+		'jade',
+		'deploy-inject',
+		'minify-html',
+		'connect'
+	);
+} );
+
+
+
+
 gulp.task( 'default', function(  )
 {
 	runSequence(
@@ -286,11 +423,10 @@ gulp.task( 'default', function(  )
 			'sass',
 			'scripts',
 			'jade',
-			'images',
-			'favicon'
+			'images'
 		],
 		'inject',
 		'connect',
 		'watch'
-	);   
+	);
 } );
