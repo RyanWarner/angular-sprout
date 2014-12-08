@@ -296,9 +296,9 @@ gulp.task( 'watch', function(  )
 
 
 
-// Deploy process.
+// Build process.
 
-gulp.task( 'deploy-scripts', [ 'eslint' ], function(  )
+gulp.task( 'build-scripts', [ 'eslint' ], function(  )
 {
 	return streamqueue( { objectMode: true },
 
@@ -342,7 +342,7 @@ gulp.task( 'deploy-scripts', [ 'eslint' ], function(  )
 } );
 
 
-gulp.task( 'deploy-inject', function( )
+gulp.task( 'build-inject', function( )
 {
 	var injectOptions = 
 	{
@@ -366,7 +366,7 @@ gulp.task( 'minify-html', function(  )
 	    .pipe( gulp.dest( BUILD_DIR ) )
 } );
 
-gulp.task( 'deploy-css', function(  )
+gulp.task( 'build-css', function(  )
 {
 	return streamqueue( { objectMode: true },
 		gulp.src( BOWER_CSS_FILES ),
@@ -383,7 +383,7 @@ gulp.task( 'deploy-css', function(  )
 
 } );
 
-gulp.task( 'deploy-images', [ 'favicon' ], function (  )
+gulp.task( 'build-images', [ 'favicon' ], function (  )
 {
     return gulp.src( IMAGES_SRC )
         .pipe( imagemin(
@@ -396,17 +396,17 @@ gulp.task( 'deploy-images', [ 'favicon' ], function (  )
 } );
 
 
-gulp.task( 'deploy', function(  )
+gulp.task( 'build', function(  )
 {
 	runSequence(
 		'clean',
 		[
-			'deploy-images',
-			'deploy-scripts',
-			'deploy-css'
+			'build-images',
+			'build-scripts',
+			'build-css'
 		],
 		'jade',
-		'deploy-inject',
+		'build-inject',
 		'minify-html',
 		'connect'
 	);

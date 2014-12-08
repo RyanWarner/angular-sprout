@@ -148,6 +148,19 @@ End to end tests interact with your interface the same way a user would, in a br
 
 `gulp protractor`
 
+## Build Process
+
+`gulp build`
+
+Deploying does a number of things:
+
+1. Cleans the build directory by removing all files using [del](https://www.npmjs.org/package/del).
+2. Minifies all images using [gulp-imagemin](https://www.npmjs.org/package/gulp-imagemin).
+3. Injects Angular dependancy annotations using [ng-annotate](https://github.com/olov/ng-annotate).
+4. Concatenates and minifies all JavaScript files using [gulp-concat](https://www.npmjs.org/package/gulp-concat) and [gulp-uglify](https://github.com/terinjokes/gulp-uglify).
+5. Concatenates and minifes all stylesheets using [gulp-minify-css](https://github.com/jonathanepollack/gulp-minify-css).
+6. Minifies HTML using [gulp-minify-html](https://github.com/jonathanepollack/gulp-minify-html).
+
 ## Coding Style
 
 angular-sprout uses [squint-style](https://github.com/RyanWarner/squint-style).
