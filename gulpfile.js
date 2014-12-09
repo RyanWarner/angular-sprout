@@ -30,6 +30,7 @@ var minifyHTML      = require( 'gulp-minify-html' );
 var minifyCSS       = require( 'gulp-minify-css' );
 var imagemin        = require( 'gulp-imagemin' );
 var pngquant        = require( 'imagemin-pngquant' );
+var filter          = require( 'gulp-filter' );
 
 var karma                 = require( 'karma' ).server;
 var protractor            = require( 'gulp-protractor' ).protractor;
@@ -319,7 +320,8 @@ gulp.task( 'build-scripts', [ 'eslint' ], function(  )
 		[
 			'angular/angular.js',
 			'*'
-		] ) ),
+		] ) )
+		.pipe( filter( '**/*.js' ) ),
 
 		// Order source scripts.
 
