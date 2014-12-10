@@ -363,7 +363,7 @@ gulp.task( 'build-inject', function( )
 		.pipe( gulp.dest( BUILD_DIR ) );
 } );
 
-gulp.task( 'minify-html', function(  )
+gulp.task( 'build-html', function(  )
 {
 	return gulp.src( BUILD_DIR + '/**/*.html' )
 	    .pipe( minifyHTML(  ) )
@@ -423,7 +423,7 @@ gulp.task( 'build', function(  )
 		],
 		'jade',
 		'build-inject',
-		'minify-html',
+		'build-html',
 		'connect'
 	);
 } );
