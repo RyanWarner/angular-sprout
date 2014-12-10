@@ -239,7 +239,7 @@ gulp.task( 'bower-files', function( )
 				bowerDirectory: BOWER_SRC,
 				bowerrc: BOWER_CONFIG,
 				bowerJson: BOWER_MANIFEST
-			} 
+			}
 		} ),
 		{
 			base: BOWER_SRC
@@ -254,7 +254,7 @@ gulp.task( 'eslint', function(  )
 		.pipe( eslint.format(  ) );
 } );
 
-gulp.task( 'scripts', [ 'eslint', 'bower-files' ], function( )
+gulp.task( 'scripts', [ 'eslint' ], function( )
 {   
 	// Copy scripts
 
@@ -472,6 +472,7 @@ gulp.task( 'default', function(  )
 			'jade',
 			'images'
 		],
+		'bower-files',
 		'inject',
 		'connect',
 		'watch'
