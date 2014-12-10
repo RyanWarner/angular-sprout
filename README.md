@@ -173,7 +173,7 @@ home-state_style.scss
 home-state_tests.js
 home-state_template.jade
 ```
-Use hyphens for state or component names, with child states separated by periods. Tag the end of each file with an underscore followed by the specific function of the file.
+Use hyphens for state or component names. Tag the end of each file with an underscore followed by the specific function of the file.
 
 ## Other Angular Boilerplates
 
