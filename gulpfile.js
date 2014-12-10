@@ -3,23 +3,30 @@ var gutil           = require( 'gulp-util' );
 var connect         = require( 'gulp-connect' );
 var cache           = require( 'gulp-cached' );
 
-
 var del             = require( 'del' );
 
 var runSequence     = require( 'run-sequence' );
 var noHash          = require( 'connect-history-api-fallback' );
-var sass            = require( 'gulp-sass' );
-var prefix          = require( 'gulp-autoprefixer' );
 
 var mainBowerFiles  = require( 'main-bower-files' );
 var inject          = require( 'gulp-inject' );
 var angularFilesort = require( 'gulp-angular-filesort' )
 
+var sass            = require( 'gulp-sass' );
+var prefix          = require( 'gulp-autoprefixer' );
 var jade            = require( 'gulp-jade' );
+
+
+
+// Linting plugins.
 
 var scsslint        = require( 'gulp-scss-lint' );
 var csscomb         = require( 'gulp-csscomb' );
 var eslint          = require( 'gulp-eslint' );
+
+
+
+// Build plugins.
 
 var ngAnnotate      = require( 'gulp-ng-annotate' );
 var uglify          = require( 'gulp-uglify' );
@@ -32,12 +39,18 @@ var imagemin        = require( 'gulp-imagemin' );
 var pngquant        = require( 'imagemin-pngquant' );
 var filter          = require( 'gulp-filter' );
 
+
+
+// Testing plugins.
+
 var karma                 = require( 'karma' ).server;
 var protractor            = require( 'gulp-protractor' ).protractor;
 var webdriver_standalone  = require( 'gulp-protractor' ).webdriver_standalone;
 var webdriver_update      = require( 'gulp-protractor' ).webdriver_update;
 
 
+
+// Constants.
 
 var BUILD_DIR         = __dirname + '/build';
 
@@ -305,9 +318,9 @@ gulp.task( 'build-scripts', [ 'eslint' ], function(  )
 {
 	return streamqueue( { objectMode: true },
 
-		// Order bower components.
+		// Select and order bower components.
 
-        gulp.src( mainBowerFiles(
+		gulp.src( mainBowerFiles(
 		{
 			paths:
 			{
@@ -326,23 +339,27 @@ gulp.task( 'build-scripts', [ 'eslint' ], function(  )
 		] ) )
 		.pipe( filter( '**/*.js' ) ),
 
-		// Order source scripts.
 
-        gulp.src( SCRIPTS_SRC_FILES )
+
+		// Select and order source scripts.
+
+		gulp.src( SCRIPTS_SRC_FILES )
 		.pipe( ngAnnotate(
 		{
-		    remove: true,
-		    add: true,
-		    single_quotes: true
+			remove: true,
+			add: true,
+			single_quotes: true
 		} ) )
 		.pipe( angularFilesort(  ) )
-    )
+	)
+
+
 
 	// Then concatenate and uglify them.
 
-    .pipe( concat( MAIN_JS_FILENAME ) )
-    .pipe( uglify(  ) )
-    .pipe( gulp.dest( BUILD_DIR ) );
+	.pipe( concat( MAIN_JS_FILENAME ) )
+	.pipe( uglify(  ) )
+	.pipe( gulp.dest( BUILD_DIR ) );
 } );
 
 
@@ -358,34 +375,41 @@ gulp.task( 'build-inject', function( )
 	var target = gulp.src( BUILD_DIR + '/index.html' );
 
 	return target
-		.pipe( inject( gulp.src( BUILD_DIR + '/angular-sprout.js', { read: false } ), injectOptions ) )
-		.pipe( inject( gulp.src( BUILD_DIR + '/angular-sprout.css', { read: false } ), injectOptions ) )
+		.pipe( inject( gulp.src( BUILD_DIR + '/' + MAIN_JS_FILENAME, { read: false } ), injectOptions ) )
+		.pipe( inject( gulp.src( BUILD_DIR + '/' + MAIN_CSS_FILENAME, { read: false } ), injectOptions ) )
 		.pipe( gulp.dest( BUILD_DIR ) );
 } );
 
 gulp.task( 'build-html', function(  )
 {
 	return gulp.src( BUILD_DIR + '/**/*.html' )
-	    .pipe( minifyHTML(  ) )
-	    .pipe( gulp.dest( BUILD_DIR ) )
+		.pipe( minifyHTML(  ) )
+		.pipe( gulp.dest( BUILD_DIR ) )
 } );
 
 gulp.task( 'build-css', function(  )
 {
 	return streamqueue( { objectMode: true },
+
+		// Select all bower styles.
+
 		gulp.src( mainBowerFiles(
-        {
-            paths:
-            {
-                bowerDirectory: BOWER_SRC,
-                bowerrc: BOWER_CONFIG,
-                bowerJson: BOWER_MANIFEST
-            }
-        } ),
-        {
-            base: BOWER_SRC
-        } )
-        .pipe( filter( '**/*.css' ) ),
+		{
+			paths:
+			{
+				bowerDirectory: BOWER_SRC,
+				bowerrc: BOWER_CONFIG,
+				bowerJson: BOWER_MANIFEST
+			}
+		} ),
+		{
+			base: BOWER_SRC
+		} )
+		.pipe( filter( '**/*.css' ) ),
+
+
+
+		// Select all source styles.
 
 		gulp.src( './app/app_styles.scss' )
 		.pipe( sass(  ) )
@@ -393,22 +417,27 @@ gulp.task( 'build-css', function(  )
 		.pipe( prefix( 'last 2 versions', { cascade: true } ) )
 		.on( 'error', handleError )
 	)
+
+
+
+	// Then concatenate and minify.
+
 	.pipe( concat( MAIN_CSS_FILENAME ) )
-    .pipe( minifyCSS(  ) )
-    .pipe( gulp.dest ( BUILD_DIR ) );
+	.pipe( minifyCSS(  ) )
+	.pipe( gulp.dest ( BUILD_DIR ) );
 
 } );
 
 gulp.task( 'build-images', [ 'favicon' ], function (  )
 {
-    return gulp.src( IMAGES_SRC )
-        .pipe( imagemin(
-        {
-            progressive: true,
-            svgoPlugins: [ { removeViewBox: false } ],
-            use: [ pngquant(  ) ]
-        } ) )
-        .pipe( gulp.dest( IMAGES ) );
+	return gulp.src( IMAGES_SRC )
+		.pipe( imagemin(
+		{
+			progressive: true,
+			svgoPlugins: [ { removeViewBox: false } ],
+			use: [ pngquant(  ) ]
+		} ) )
+		.pipe( gulp.dest( IMAGES ) );
 } );
 
 
