@@ -71,12 +71,12 @@ var SCRIPTS_SRC_FILES =
 	'!./app/**/*_test*.js'
 ];
 
-var TEST_FILES        = './app/**/*_test*.js';
-var ALL_JAVASCRIPT    = './app/**/*.js';
+var TEST_FILES        = __dirname + '/app/**/*_test*.js';
+var ALL_JAVASCRIPT    = __dirname + '/app/**/*.js';
 
-var BOWER_SRC         = './bower_components';
-var BOWER_MANIFEST    = './bower.json';
-var BOWER_CONFIG      = './.bowerrc';
+var BOWER_SRC         = __dirname + '/bower_components';
+var BOWER_MANIFEST    = __dirname + '/bower.json';
+var BOWER_CONFIG      = __dirname + '/.bowerrc';
 
 var BOWER_DIR         = BUILD_DIR + '/bower';
 var BOWER_CSS_FILES   = BOWER_DIR + '/**/*.css';
@@ -86,9 +86,9 @@ var IMAGES_SRC        = __dirname + '/images/**/*';
 var IMAGES            = BUILD_DIR + '/images/';
 var FAVICON           = __dirname + '/favicon.png';
 
-var LINTERS_DIR       = './linters'
+var LINTERS_DIR       = __dirname + '/linters'
 
-var E2E_TESTS         = './app/**/*_test-e2e.js';
+var E2E_TESTS         = __dirname + '/app/**/*_test-e2e.js';
 
 
 var handleError = function( err )
@@ -309,6 +309,8 @@ gulp.task( 'watch', function(  )
 
 	gulp.watch( TEST_FILES, [ 'eslint' ] );
 } );
+
+
 
 
 
