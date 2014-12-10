@@ -31,6 +31,22 @@ I still have many questions to answer and best practices to discover, and when I
 
 ```
 app/
+	common-components/
+		directives/
+			dropdown/
+				dropdown_controller.js
+				dropdown_directive.js
+				dropdown_styles.scss
+				dropdown_template.jade
+		filters/
+			reverse_filter.js
+		services/
+	common-styles/
+		_base.scss
+		_breakpoints.scss
+		_mixins.scss
+		_reset.scss
+		_variables.scss
 	states/
 		root/
 			parent-state-2/
@@ -61,47 +77,28 @@ app/
 				state-1_template.jade
 				state-1_test-e2e.js
 				state-1_test-unit.js
-			
-	common-components/
-		directives/
-			dropdown/
-				dropdown_controller.js
-				dropdown_directive.js
-				dropdown_styles.scss
-				dropdown_template.jade
-		filters/
-			reverse_filter.js
-		services/
-	common-styles/
-		_base.scss
-		_breakpoints.scss
-		_mixins.scss
-		_reset.scss
-		_variables.scss
 	app_module.js
 	app_styles.scss
 	index.jade
-	
+bower_components/
+build/
+images/
+node_modules/
 tests/
 	coverage/
 	karma.config.js
 	protractor.config.js
-
-
-bower_components/       // Dynamically created
-node_modules/
-build/
-	
-package.json            // Dependencies
-bower.json
-
-gulpfile.js			   	// Build file
-
-README.md
-
-.csscomb.json           // Linting config
+.csscomb.json
 .eslintrc
-.scss-linting-config
+.gitignore
+.htaccess
+bower.json
+favicon.png
+gulpfile.js
+LICENSE
+package.json
+README.md
+scss-linting-config.yml
 ```
 
 ## Local Setup
@@ -167,21 +164,24 @@ angular-sprout uses [squint-style](https://github.com/RyanWarner/squint-style).
 
 ### File Naming Conventions
 
-`[ parent-name ] . [ child-name ] _ [ type ] . [ file extension ]`
+`[ state-name ] _ [ type ] . [ file extension ]`
 
 ```
-home-page.about_module.js
-home-page.about_controller.js
-home-page.about_style.scss
-home-page.about_tests.js
-home-page.about_template.jade
+home-state_module.js
+home-state_controller.js
+home-state_style.scss
+home-state_tests.js
+home-state_template.jade
 ```
 Use hyphens for state or component names, with child states separated by periods. Tag the end of each file with an underscore followed by the specific function of the file.
+
+## Other Angular Boilerplates
+
+- [angular-seed](https://github.com/angular/angular-seed)
+- [nghellostyle](https://github.com/zemirco/nghellostyle)
+- [ngbp](http://joshdmiller.github.io/ng-boilerplate/#/home)
 
 ## Further Reading
 
 - [Angular App Structure Best Practices](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/mobilebasic?pli=1)
-- [angular-seed](https://github.com/angular/angular-seed)
-- [nghellostyle](https://github.com/zemirco/nghellostyle)
-- [ngbp](http://joshdmiller.github.io/ng-boilerplate/#/home)
 - [AngularJS Style Guide for Closure](https://google-styleguide.googlecode.com/svn/trunk/angularjs-google-style.html#googprovide)
