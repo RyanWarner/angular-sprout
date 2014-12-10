@@ -41,6 +41,9 @@ var webdriver_update      = require( 'gulp-protractor' ).webdriver_update;
 
 var BUILD_DIR         = __dirname + '/build';
 
+var MAIN_CSS_FILENAME = 'angular-sprout.css';
+var MAIN_JS_FILENAME  = 'angular-sprout.js';
+
 var JADE_SRC_FILES    = __dirname + '/app/**/*.jade';
 
 var SASS_SRC_FILES    = __dirname + '/app/**/*.scss';
@@ -337,7 +340,7 @@ gulp.task( 'build-scripts', [ 'eslint' ], function(  )
 
 	// Then concatenate and uglify them.
 
-    .pipe( concat( 'angular-sprout.js' ) )
+    .pipe( concat( MAIN_JS_FILENAME ) )
     .pipe( uglify(  ) )
     .pipe( gulp.dest( BUILD_DIR ) );
 } );
@@ -370,7 +373,19 @@ gulp.task( 'minify-html', function(  )
 gulp.task( 'build-css', function(  )
 {
 	return streamqueue( { objectMode: true },
-		gulp.src( BOWER_CSS_FILES ),
+		gulp.src( mainBowerFiles(
+        {
+            paths:
+            {
+                bowerDirectory: BOWER_SRC,
+                bowerrc: BOWER_CONFIG,
+                bowerJson: BOWER_MANIFEST
+            }
+        } ),
+        {
+            base: BOWER_SRC
+        } )
+        .pipe( filter( '**/*.css' ) ),
 
 		gulp.src( './app/app_styles.scss' )
 		.pipe( sass(  ) )
@@ -378,7 +393,7 @@ gulp.task( 'build-css', function(  )
 		.pipe( prefix( 'last 2 versions', { cascade: true } ) )
 		.on( 'error', handleError )
 	)
-	.pipe( concat( 'angular-sprout.css' ) )
+	.pipe( concat( MAIN_CSS_FILENAME ) )
     .pipe( minifyCSS(  ) )
     .pipe( gulp.dest ( BUILD_DIR ) );
 
