@@ -167,12 +167,13 @@ angular-sprout uses [squint-style](https://github.com/RyanWarner/squint-style).
 `[ state-name ] _ [ type ] . [ file extension ]`
 
 ```
-home-state_module.js
 home-state_controller.js
-home-state_style.scss
-home-state_tests.js
+home-state_module.js
+home-state_styles.scss
 home-state_template.jade
+home-state_test-unit.js
 ```
+
 Use hyphens for state or component names. Tag the end of each file with an underscore followed by the specific function of the file.
 
 ## Other Angular Boilerplates
