@@ -142,8 +142,9 @@ Unit tests define the applications API. Take some time to read [An Introduction 
 End to end tests interact with your interface the same way a user would, in a browser. Try the [protractor tutorial](http://angular.github.io/protractor/#/tutorial).
 
 - [Protractor](https://github.com/angular/protractor)
+- Make sure you have a [Java runtime environment installed](http://support.apple.com/kb/DL1572)
 
-`gulp protractor`
+`gulp e2e-tests`
 
 ## Build Process
 

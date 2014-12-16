@@ -45,7 +45,6 @@ var filter          = require( 'gulp-filter' );
 
 var karma                 = require( 'karma' ).server;
 var protractor            = require( 'gulp-protractor' ).protractor;
-var webdriver_standalone  = require( 'gulp-protractor' ).webdriver_standalone;
 var webdriver_update      = require( 'gulp-protractor' ).webdriver_update;
 
 
@@ -128,7 +127,7 @@ gulp.task( 'unit-tests', function( done )
 
 gulp.task( 'update-webdriver', webdriver_update );
 
-gulp.task( 'protractor', [ 'update-webdriver' ], function( done )
+gulp.task( 'e2e-tests', [ 'update-webdriver' ], function( done )
 {
 	gulp.src( E2E_TESTS )
 		.pipe( protractor( {
