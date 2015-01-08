@@ -106,14 +106,16 @@ scss-linting-config.yml
 ### Prerequisites
 1. [Homebrew](http://brew.sh/)
 	- `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+	- `brew update`
+	- `brew doctor`
+	- `open ~./bash_profile`
+	- Add `export PATH="/usr/local/bin:$PATH"` to your bash profile and save it.
 1. [NodeJS](http://nodejs.org/)
 	- `brew install node`
 1. [Bower](http://bower.io/)
 	- `npm install --global bower`
 1. [Gulp](http://gulp.com/)
 	- `npm install --global gulp`
-1. [Ruby](https://www.ruby-lang.org/en/installation/)
-	- `brew install ruby`
 1.	[scss-lint](https://github.com/causes/scss-lint)
 	- `gem install scss-lint`
 
