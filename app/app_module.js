@@ -20,7 +20,7 @@ angularSprout.config( function( $urlRouterProvider, $locationProvider )
 
 angularSprout.run( [ '$rootScope', function( $rootScope )
 {
-	$rootScope.$on( '$stateChangeSuccess', function( toState, toParams, fromState, fromParams )
+	$rootScope.$on( '$stateChangeSuccess', function( event, toState, toParams, fromState, fromParams )
 	{
 		$rootScope.fromState = fromState;
 		$rootScope.fromParams = fromParams;
