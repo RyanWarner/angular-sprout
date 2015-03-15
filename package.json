@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/RyanWarner/angular-seed",
   "devDependencies": {
-    "gulp": "~3.8.10",
+    "gulp": "~3.8.11",
     "gulp-util": "~3.0.1",
     "gulp-sass": "~1.2.4",
     "gulp-jade": "~0.10.0",
