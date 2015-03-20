@@ -24,6 +24,7 @@
     	"no-inner-declarations": 2,
     	"no-invalid-regexp": 2,
     	"no-negated-in-lhs": 2,
+        "no-multi-spaces": 0,
 
     	"block-scoped-var": 1,
     	"complexity": 0,
