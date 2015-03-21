@@ -281,7 +281,7 @@ gulp.task( 'favicon', function(  )
 
 gulp.task( 'clean', function(  )
 {
-	del( BUILD_DIR + '/*' );
+	del( BUILD_DIR );
 } );
 
 gulp.task( 'watch', function(  )
