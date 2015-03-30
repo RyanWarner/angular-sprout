@@ -5,7 +5,6 @@ var runSequence     = require( 'run-sequence' );
 
 
 
-
 gulp.task( 'watch', function(  )
 {
 	gulp.watch( SASS_SRC_FILES, [ 'sass' ] );
