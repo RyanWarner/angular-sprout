@@ -12,10 +12,10 @@ gulp.task( 'default', function(  )
 		[
 			'sass',
 			'scripts',
-			// 'jade',
-			// 'images'
-		]
-		// 'bower-files',
+			'jade',
+			'images'
+		],
+		'bower-files'
 		// 'inject',
 		// 'connect',
 		// 'watch'
