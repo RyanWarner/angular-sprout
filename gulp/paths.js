@@ -62,6 +62,14 @@ module.exports =
 		{
 			source: root + '/app/**/*_test*.js',
 			e2e: root + '/app/**/*_test-e2e.js'
+		},
+		gulp:
+		{
+			source:
+			[
+				root + '/gulp/**/*.js',
+				root + 'gulpfile.js'
+			]
 		}
 	}
 };

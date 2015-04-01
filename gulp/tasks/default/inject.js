@@ -8,6 +8,7 @@ var inject          = require( 'gulp-inject' );
 var angularFilesort = require( 'gulp-angular-filesort' )
 
 var path   = require( '../../paths.js' );
+var error  = require( '../../error-handler.js' );
 
 
 
@@ -42,7 +43,7 @@ gulp.task( 'inject', function( )
 		.pipe( inject( mainCssSource, injectOptions ) )
 		.pipe( inject( bowerSource, bowerInjectOptions ) )
 		.pipe( inject( sortedAppJs, injectOptions ) )
-		.on( 'error', handleError )
+		.on( 'error', error.handler )
 		
 		.pipe( gulp.dest( path.to.destination ) )
 		.pipe( connect.reload(  ) );

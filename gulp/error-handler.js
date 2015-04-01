@@ -3,9 +3,12 @@ var gutil           = require( 'gulp-util' );
 
 
 
-var handleError = function( err )
+module.exports =
 {
-	console.log( err.toString(  ) );
-	gutil.beep;
-	this.emit( 'end' );
+	handler: function(  )
+	{
+		console.log( 'Error: ' +  err );
+		gutil.beep(  );
+		this.emit( 'end' );
+	}
 };
