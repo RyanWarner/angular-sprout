@@ -6,7 +6,7 @@ var pathToThisFile = __dirname;
 
 var root = path.dirname( pathToThisFile );
 
-var destination = root + '/build';
+var destination = root + '/build-destination';
 var bowerDir = destination + '/bower';
 
 module.exports =
