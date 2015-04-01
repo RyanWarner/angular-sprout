@@ -13,20 +13,12 @@ gulp.task( 'watch', function(  )
 
 	gulp.watch( path.to.jade.source, function(  )
 	{
-		runSequence(
-
-			'jade',
-			'inject'
-		);
+		runSequence( 'jade', 'inject' );
 	} );
 
 	gulp.watch( path.to.scripts.source, function(  )
 	{
-		runSequence(
-			'scripts',
-			'jade',
-			'inject'
-		);
+		runSequence( 'scripts', 'jade', 'inject' );
 	} );
 
 	gulp.watch( path.to.tests.source, [ 'eslint' ] );
