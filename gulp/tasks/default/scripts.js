@@ -2,6 +2,7 @@ var gulp            = require( 'gulp' );
 var gutil           = require( 'gulp-util' );
 var connect         = require( 'gulp-connect' );
 var cache           = require( 'gulp-cached' );
+var merge           = require( 'merge-stream' );
 
 var mainBowerFiles  = require( 'main-bower-files' );
 var inject          = require( 'gulp-inject' );
@@ -36,7 +37,11 @@ gulp.task( 'bower-files', function( )
 
 gulp.task( 'eslint', function(  )
 {
-	return gulp.src( path.to.scripts.source )
+	var appScripts = gulp.src( path.to.scripts.source );
+	var testScripts = gulp.src( path.to.tests.source );
+	var gulpScripts = gulp.src( path.to.gulp.source );
+
+	return merge( appScripts, testScripts, gulpScripts )
 		.pipe( eslint(  ) )
 		.pipe( eslint.format(  ) );
 } );
