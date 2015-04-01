@@ -1,10 +1,7 @@
 'use strict';
 
 var gulp            = require( 'gulp' );
-var gutil           = require( 'gulp-util' );
 var connect         = require( 'gulp-connect' );
-var cache           = require( 'gulp-cached' );
-
 var mainBowerFiles  = require( 'main-bower-files' );
 var inject          = require( 'gulp-inject' );
 var angularFilesort = require( 'gulp-angular-filesort' );
@@ -38,7 +35,7 @@ gulp.task( 'inject', function( )
 	var bowerSource    = gulp.src( [ path.to.bower.scripts ], { read: false } );
 	var bowerCssSource = gulp.src( [ path.to.bower.css ], { read: false } );
 
-	var mainCssSource  = gulp.src( [ MAIN_CSS_FILE ], { read: false } );
+	var mainCssSource  = gulp.src( [ path.to.main.css.source ], { read: false } );
 
 	return target
 		.pipe( inject( bowerCssSource, bowerInjectOptions ) )

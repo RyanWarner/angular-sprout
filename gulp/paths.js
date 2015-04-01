@@ -16,8 +16,15 @@ module.exports =
 		destination: destination,
 		main:
 		{
-			cssFilename: 'angular-sprout.css',
-			jsFilename: 'angular-sprout.js'
+			css:
+			{
+				source: destination + '/app_styles.css',
+				destination: 'angular-sprout.css'
+			},
+			scripts:
+			{
+				destination: 'angular-sprout.js'
+			}
 		},
 		jade:
 		{
@@ -37,8 +44,8 @@ module.exports =
 		sass:
 		{
 			source: root + '/app/**/*.scss',
-			main: '',
-			destination: destination + '/css'
+			main: root + '/app/app_styles.scss',
+			destination: destination
 		},
 		images:
 		{

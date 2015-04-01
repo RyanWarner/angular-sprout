@@ -2,6 +2,7 @@
 
 var gulp    = require( 'gulp' );
 var connect = require( 'gulp-connect' );
+var noHash  = require( 'connect-history-api-fallback' );
 
 var path    = require( '../../paths.js' );
 

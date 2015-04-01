@@ -15,10 +15,10 @@ gulp.task( 'default', function(  )
 			'jade',
 			'images'
 		],
-		'bower-files'
-		// 'inject',
-		// 'connect',
-		// 'watch'
+		'bower-files',
+		'inject',
+		'connect',
+		'watch'
 	);
 } );
 

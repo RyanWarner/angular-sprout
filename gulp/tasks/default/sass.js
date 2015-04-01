@@ -34,8 +34,7 @@ gulp.task( 'scss-lint', [ 'csscomb' ], function(  )
 
 gulp.task( 'sass', [ 'scss-lint' ], function(  )
 {
-	return gulp.src( __dirname + '/app/app_styles.scss' )
-		//.pipe( cache( 'sass' ) )
+	return gulp.src( path.to.sass.main )
 		.pipe( sass(  ) )
 		.on( 'error', error.handler )
 		.pipe( prefix( 'last 2 versions', { cascade: true } ) )
