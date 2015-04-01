@@ -30,9 +30,9 @@ gulp.task( 'build', function(  )
 			'build-images',
 			'build-scripts',
 			'build-css'
-		]
-		// 'jade',
-		// 'build-inject',
+		],
+		'jade',
+		'build-inject'
 		// 'build-html',
 		// 'connect'
 	);
