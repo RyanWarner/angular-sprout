@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp     = require( 'gulp' );
 var connect  = require( 'gulp-connect' );
 var cache    = require( 'gulp-cached' );

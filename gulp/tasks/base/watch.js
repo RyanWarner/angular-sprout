@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp        = require( 'gulp' );
 var del         = require( 'del' );
 var runSequence = require( 'run-sequence' );
@@ -12,6 +14,7 @@ gulp.task( 'watch', function(  )
 	gulp.watch( path.to.jade.source, function(  )
 	{
 		runSequence(
+
 			'jade',
 			'inject'
 		);

@@ -1,8 +1,9 @@
-// Paths.
+'use strict';
 
 var path = require( 'path' );
 
 var pathToThisFile = __dirname;
+
 var root = path.dirname( pathToThisFile );
 
 var destination = root + '/build';
@@ -15,8 +16,8 @@ module.exports =
 		destination: destination,
 		main:
 		{
-			css_filename: 'angular-sprout.css',
-			js_filename: 'angular-sprout.js'
+			cssFilename: 'angular-sprout.css',
+			jsFilename: 'angular-sprout.js'
 		},
 		jade:
 		{
@@ -56,7 +57,7 @@ module.exports =
 			config: root + '/.bowerrc',
 			destination: bowerDir,
 			css: bowerDir + '/**/*.css',
-			scripts: bowerDir + '/**/*.js',
+			scripts: bowerDir + '/**/*.js'
 		},
 		tests:
 		{

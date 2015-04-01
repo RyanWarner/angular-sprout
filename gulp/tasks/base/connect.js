@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp    = require( 'gulp' );
 var connect = require( 'gulp-connect' );
 
@@ -12,10 +14,10 @@ gulp.task( 'connect', function(  )
 		root: path.to.destination,
 		hostname: '0.0.0.0',
 		livereload: true,
-		middleware: function( connect, opt )
+		middleware: function(  )
 		{
 			// This get's rid of the # symbol in the URL
-			return[ noHash ];
+			return [ noHash ];
 		}
 	} );
 } );

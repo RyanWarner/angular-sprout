@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp            = require( 'gulp' );
 var gutil           = require( 'gulp-util' );
 var connect         = require( 'gulp-connect' );
@@ -6,7 +8,7 @@ var merge           = require( 'merge-stream' );
 
 var mainBowerFiles  = require( 'main-bower-files' );
 var inject          = require( 'gulp-inject' );
-var angularFilesort = require( 'gulp-angular-filesort' )
+var angularFilesort = require( 'gulp-angular-filesort' );
 
 
 var eslint          = require( 'gulp-eslint' );

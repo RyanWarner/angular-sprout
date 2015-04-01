@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp            = require( 'gulp' );
 var gutil           = require( 'gulp-util' );
 var connect         = require( 'gulp-connect' );
@@ -5,7 +7,7 @@ var cache           = require( 'gulp-cached' );
 
 var mainBowerFiles  = require( 'main-bower-files' );
 var inject          = require( 'gulp-inject' );
-var angularFilesort = require( 'gulp-angular-filesort' )
+var angularFilesort = require( 'gulp-angular-filesort' );
 
 var path   = require( '../../paths.js' );
 var error  = require( '../../error-handler.js' );
@@ -15,17 +17,17 @@ var error  = require( '../../error-handler.js' );
 gulp.task( 'inject', function( )
 {
 
-	var injectOptions = 
+	var injectOptions =
 	{
-	  relative: true,
-	  addRootSlash: false
+		relative: true,
+		addRootSlash: false
 	};
 
 	var bowerInjectOptions =
 	{
-	  relative: true,
-	  addRootSlash: false,
-	  starttag: '<!-- inject:bower:{{ext}} -->'
+		relative: true,
+		addRootSlash: false,
+		starttag: '<!-- inject:bower:{{ext}} -->'
 	};
 
 	var target = gulp.src( path.to.destination + '/index.html' );
@@ -44,7 +46,7 @@ gulp.task( 'inject', function( )
 		.pipe( inject( bowerSource, bowerInjectOptions ) )
 		.pipe( inject( sortedAppJs, injectOptions ) )
 		.on( 'error', error.handler )
-		
+
 		.pipe( gulp.dest( path.to.destination ) )
 		.pipe( connect.reload(  ) );
 } );
