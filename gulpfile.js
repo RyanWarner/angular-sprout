@@ -32,8 +32,8 @@ gulp.task( 'build', function(  )
 			'build-css'
 		],
 		'jade',
-		'build-inject'
-		// 'build-html',
-		// 'connect'
+		'build-inject',
+		'build-html',
+		'connect'
 	);
 } );
