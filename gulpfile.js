@@ -8,13 +8,13 @@ requireDir( './gulp/tasks', { recurse: true } );
 gulp.task( 'default', function(  )
 {
 	runSequence(
-		'clean'
-		// [
-		// 	'sass',
-		// 	'scripts',
-		// 	'jade',
-		// 	'images'
-		// ],
+		'clean',
+		[
+			'sass',
+			// 'scripts',
+			// 'jade',
+			// 'images'
+		]
 		// 'bower-files',
 		// 'inject',
 		// 'connect',
