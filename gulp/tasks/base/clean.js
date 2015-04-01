@@ -1,10 +1,10 @@
 var gulp  = require( 'gulp' );
 var del   = require( 'del' );
 
-
+var path   = require( '../../paths.js' );
 
 gulp.task( 'clean', function(  )
 {
-	del( BUILD_DIR );
+	del.sync( path.to.destination );
 } );
 

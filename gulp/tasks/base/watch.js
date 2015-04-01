@@ -1,15 +1,15 @@
-var gulp            = require( 'gulp' );
-var del             = require( 'del' );
-var runSequence     = require( 'run-sequence' );
+var gulp        = require( 'gulp' );
+var del         = require( 'del' );
+var runSequence = require( 'run-sequence' );
 
-
+var path        = require( '../../paths.js' );
 
 
 gulp.task( 'watch', function(  )
 {
-	gulp.watch( SASS_SRC_FILES, [ 'sass' ] );
+	gulp.watch( path.to.sass.source, [ 'sass' ] );
 
-	gulp.watch( JADE_SRC_FILES, function(  )
+	gulp.watch( path.to.jade.source, function(  )
 	{
 		runSequence(
 			'jade',
@@ -17,7 +17,7 @@ gulp.task( 'watch', function(  )
 		);
 	} );
 
-	gulp.watch( SCRIPTS_SRC_FILES, function(  )
+	gulp.watch( path.to.scripts.source, function(  )
 	{
 		runSequence(
 			'scripts',
@@ -26,5 +26,5 @@ gulp.task( 'watch', function(  )
 		);
 	} );
 
-	gulp.watch( TEST_FILES, [ 'eslint' ] );
+	gulp.watch( path.to.tests.source, [ 'eslint' ] );
 } );

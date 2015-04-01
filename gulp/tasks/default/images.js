@@ -1,20 +1,20 @@
-var gulp            = require( 'gulp' );
-var connect         = require( 'gulp-connect' );
+var gulp    = require( 'gulp' );
+var connect = require( 'gulp-connect' );
 
-
+var path    = require( '../../paths.js' );
 
 
 
 gulp.task( 'images', [ 'favicon' ], function(  )
 {
-	return gulp.src( IMAGES_SRC )
-		.pipe( gulp.dest( IMAGES ) );
+	return gulp.src( path.to.images.source )
+		.pipe( gulp.dest( path.to.images.destination ) );
 } );
 
 gulp.task( 'favicon', function(  )
 {
-	return gulp.src( FAVICON )
-		.pipe( gulp.dest( BUILD_DIR ) );
+	return gulp.src( path.to.favicon.source )
+		.pipe( gulp.dest( path.to.favicon.destination ) );
 } );
 
 

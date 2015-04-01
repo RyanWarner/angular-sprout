@@ -3,12 +3,11 @@ var gutil           = require( 'gulp-util' );
 var connect         = require( 'gulp-connect' );
 var cache           = require( 'gulp-cached' );
 
-
-
 var mainBowerFiles  = require( 'main-bower-files' );
 var inject          = require( 'gulp-inject' );
 var angularFilesort = require( 'gulp-angular-filesort' )
 
+var path   = require( '../../paths.js' );
 
 
 
@@ -28,13 +27,13 @@ gulp.task( 'inject', function( )
 	  starttag: '<!-- inject:bower:{{ext}} -->'
 	};
 
-	var target = gulp.src( BUILD_DIR + '/index.html' );
+	var target = gulp.src( path.to.destination + '/index.html' );
 
-	var appJsSource    = gulp.src( [ BUILD_DIR + '/**/*.js', '!' + BUILD_DIR + '/bower/**/*.*' ] );
+	var appJsSource    = gulp.src( [ path.to.destination + '/**/*.js', '!' + path.to.destination + '/bower/**/*.*' ] );
 	var sortedAppJs    = appJsSource.pipe( angularFilesort(  ) );
 
-	var bowerSource    = gulp.src( [ BOWER_JS_FILES ], { read: false } );
-	var bowerCssSource = gulp.src( [ BOWER_CSS_FILES ], { read: false } );
+	var bowerSource    = gulp.src( [ path.to.bower.scripts ], { read: false } );
+	var bowerCssSource = gulp.src( [ path.to.bower.css ], { read: false } );
 
 	var mainCssSource  = gulp.src( [ MAIN_CSS_FILE ], { read: false } );
 
@@ -45,6 +44,6 @@ gulp.task( 'inject', function( )
 		.pipe( inject( sortedAppJs, injectOptions ) )
 		.on( 'error', handleError )
 		
-		.pipe( gulp.dest( BUILD_DIR ) )
+		.pipe( gulp.dest( path.to.destination ) )
 		.pipe( connect.reload(  ) );
 } );

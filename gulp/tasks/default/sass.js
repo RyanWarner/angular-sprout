@@ -1,25 +1,21 @@
-var gulp            = require( 'gulp' );
-var connect         = require( 'gulp-connect' );
-var cache           = require( 'gulp-cached' );
+var gulp     = require( 'gulp' );
+var connect  = require( 'gulp-connect' );
+var cache    = require( 'gulp-cached' );
 
-var sass            = require( 'gulp-sass' );
-var prefix          = require( 'gulp-autoprefixer' );
+var sass     = require( 'gulp-sass' );
+var prefix   = require( 'gulp-autoprefixer' );
 
+var scsslint = require( 'gulp-scss-lint' );
+var csscomb  = require( 'gulp-csscomb' );
 
-
-// Linting plugins.
-
-var scsslint        = require( 'gulp-scss-lint' );
-var csscomb         = require( 'gulp-csscomb' );
-var eslint          = require( 'gulp-eslint' );
+var path     = require( '../../paths.js' );
 
 
 
-// Styles.
 
 gulp.task( 'csscomb', function (  )
 {
-	return gulp.src( SASS_SRC_FILES )
+	return gulp.src( path.to.sass.source )
 		.pipe( cache( 'csscomb' ) )
 		.pipe( csscomb(  ) )
 		.on( 'error', handleError )
@@ -28,7 +24,7 @@ gulp.task( 'csscomb', function (  )
 
 gulp.task( 'scss-lint', [ 'csscomb' ], function(  )
 {
-	return gulp.src( SASS_SRC_FILES )
+	return gulp.src( path.to.sass.source )
 		.pipe( scsslint( { config: 'scss-linting-config.yml' } ) )
 		.on( 'error', handleError );
 } );
@@ -41,7 +37,7 @@ gulp.task( 'sass', [ 'scss-lint' ], function(  )
 		.on( 'error', handleError )
 		.pipe( prefix( 'last 2 versions', { cascade: true } ) )
 		.on( 'error', handleError )
-		.pipe( gulp.dest( BUILD_DIR ) )
+		.pipe( gulp.dest( path.to.sass.destination ) )
 		.pipe( connect.reload(  ) );
 } );
 
