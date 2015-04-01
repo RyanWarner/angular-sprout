@@ -30,10 +30,10 @@ gulp.task( 'build', function(  )
 			'build-images',
 			'build-scripts',
 			'build-css'
-		],
-		'jade',
-		'build-inject',
-		'build-html',
-		'connect'
+		]
+		// 'jade',
+		// 'build-inject',
+		// 'build-html',
+		// 'connect'
 	);
 } );

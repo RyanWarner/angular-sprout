@@ -19,11 +19,11 @@ module.exports =
 			css:
 			{
 				source: destination + '/app_styles.css',
-				destination: 'angular-sprout.css'
+				file: 'angular-sprout.css'
 			},
-			scripts:
+			script:
 			{
-				destination: 'angular-sprout.js'
+				file: 'angular-sprout.js'
 			}
 		},
 		jade:
