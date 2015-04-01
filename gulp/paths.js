@@ -36,8 +36,8 @@ module.exports =
 		sass:
 		{
 			source: root + '/app/**/*.scss',
-			main: ''
-			destination: desitnation + '/css';
+			main: '',
+			destination: destination + '/css'
 		},
 		images:
 		{
@@ -48,7 +48,7 @@ module.exports =
 		{
 			source: root + '/favicon.png',
 			destination: destination
-		}
+		},
 		bower:
 		{
 			source: root + '/bower_components',
@@ -73,22 +73,3 @@ module.exports =
 		}
 	}
 };
-
-
-var SASS_SRC_FILES    = __dirname + '/app/**/*.scss';
-var MAIN_CSS_FILE     = BUILD_DIR + '/app_styles.css';
-var CSS_DIR           = BUILD_DIR + '/css'
-var CSS_FILES         = CSS_DIR + '/**/*.css';
-
-
-
-var TEST_FILES        = __dirname + '/app/**/*_test*.js';
-var ALL_JAVASCRIPT    = __dirname + '/app/**/*.js';
-
-
-var IMAGES_SRC        = __dirname + '/images/**/*';
-var IMAGES            = BUILD_DIR + '/images/';
-
-var LINTERS_DIR       = __dirname + '/linters'
-
-var E2E_TESTS         = __dirname + '/app/**/*_test-e2e.js';
