@@ -11,7 +11,7 @@ gulp.task( 'default', function(  )
 		'clean',
 		[
 			'sass',
-			// 'scripts',
+			'scripts',
 			// 'jade',
 			// 'images'
 		]

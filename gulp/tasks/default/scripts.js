@@ -36,7 +36,7 @@ gulp.task( 'bower-files', function( )
 
 gulp.task( 'eslint', function(  )
 {
-	return gulp.src( [ path.to.scripts.source, path.to.tests.source, path.to.gulp.source ] )
+	return gulp.src( path.to.scripts.source )
 		.pipe( eslint(  ) )
 		.pipe( eslint.format(  ) );
 } );
