@@ -69,7 +69,9 @@ module.exports =
 		tests:
 		{
 			source: root + '/app/**/*_test*.js',
-			e2e: root + '/app/**/*_test-e2e.js'
+			e2e: root + '/app/**/*_test-e2e.js',
+			karmaConfig: root + '/tests/karma.config.js',
+			protractorConfig: root + '/tests/protractor.config.js'
 		},
 		gulp:
 		{
