@@ -27,6 +27,31 @@ I still have many questions to answer and best practices to discover, and when I
 - [Sass](http://sass-lang.com/)
 - [Gulp](http://gulp.com/)
 
+## Local Setup
+
+### Prerequisites
+1. [Homebrew](http://brew.sh/)
+	- `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
+	- `brew update`
+	- `brew doctor`
+	- `open ~./bash_profile`
+	- Add `export PATH="/usr/local/bin:$PATH"` to your bash profile and save it.
+1. [NodeJS](http://nodejs.org/)
+	- `brew install node`
+1. [Bower](http://bower.io/)
+	- `npm install --global bower`
+1. [Gulp](http://gulp.com/)
+	- `npm install --global gulp`
+1.	[scss-lint](https://github.com/causes/scss-lint)
+	- `gem install scss-lint`
+
+### Start Up
+
+1. `npm install`
+2. `bower install`
+2. `gulp`
+
+
 ## File Structure
 
 ```
@@ -101,29 +126,6 @@ README.md
 scss-linting-config.yml
 ```
 
-## Local Setup
-
-### Prerequisites
-1. [Homebrew](http://brew.sh/)
-	- `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-	- `brew update`
-	- `brew doctor`
-	- `open ~./bash_profile`
-	- Add `export PATH="/usr/local/bin:$PATH"` to your bash profile and save it.
-1. [NodeJS](http://nodejs.org/)
-	- `brew install node`
-1. [Bower](http://bower.io/)
-	- `npm install --global bower`
-1. [Gulp](http://gulp.com/)
-	- `npm install --global gulp`
-1.	[scss-lint](https://github.com/causes/scss-lint)
-	- `gem install scss-lint`
-
-### Start Up
-
-1. `npm install`
-2. `bower install`
-2. `gulp`
 
 ## Tests
 
