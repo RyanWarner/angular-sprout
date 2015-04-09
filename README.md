@@ -22,14 +22,16 @@ I still have many questions to answer and best practices to discover, and when I
 
 ## Stack
 
-### Front-end framework
+What defining tools and libraries make up this project's architecture?
+
+#### Front-end framework
 - [Angular](https://angularjs.org/) with [AngularUI Router](https://github.com/angular-ui/ui-router)
 
-### Preprocessors
+#### Preprocessors
 - [Jade](http://jade-lang.com/)
 - [Sass](http://sass-lang.com/) with [autoprefixer](https://github.com/postcss/autoprefixer-core).
 
-### Build System
+#### Build System
 - [Gulp](http://gulp.com/)
 
 ## Local Setup
