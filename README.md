@@ -66,9 +66,9 @@ app/
 	common-components/
 		directives/
 			dropdown/
+				_dropdown_styles.scss
 				dropdown_controller.js
 				dropdown_directive.js
-				dropdown_styles.scss
 				dropdown_template.jade
 		filters/
 			reverse_filter.js
@@ -83,29 +83,29 @@ app/
 		root/
 			parent-state-2/
 				child-state-1/
+					_child-state-1_styles.scss
 					child-state-1_controler.js
 					child-state-1_module.js
-					child-state-1_styles.scss
 					child-state-1_template.jade
 					child-state-1_test-e2e.js
 					child-state-1_test-unit.js
-				child-state-2
+				child-state-2/
+					_child-state-2_styles.scss
 					child-state-2_controler.js
 					child-state-2_module.js
-					child-state-2_styles.scss
 					child-state-2_template.jade
 					child-state-2_test-e2e.js
 					child-state-2_test-unit.js
+				_parent-state-2_styles.scss
 				parent-state-2_controler.js
 				parent-state-2_module.js
-				parent-state-2_styles.scss
 				parent-state-2_template.jade
 				parent-state-2_test-e2e.js
 				parent-state-2_test-unit.js
 			state-1/
+				_state-1_styles.scss
 				state-1_controller.js
 				state-1_module.js
-				state-1_styles.scss
 				state-1_template.jade
 				state-1_test-e2e.js
 				state-1_test-unit.js
