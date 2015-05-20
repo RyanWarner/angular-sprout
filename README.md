@@ -1,5 +1,9 @@
 # angular-sprout
 
+
+**This repo is no longer updated in a timely manner. While I will update it from time to time, my efforts have moved here: [app-sprout](http://app-sprout.com).**
+* * *
+
 An opinionated starting point for AngularJS web applications. 
 
 Why? What's wrong with existing seeds like [nghellostyle](https://github.com/zemirco/nghellostyle), the official [angular-seed](https://github.com/angular/angular-seed), or [ngbp](https://github.com/ngbp/ngbp)? Nothing, really. In fact, I learned an incredible amount from all of the above, and copied the important stuff like:
